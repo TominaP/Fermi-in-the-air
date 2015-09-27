@@ -10,6 +10,9 @@ namespace FermiInTheAir
     {
         static void Main(string[] args)
         {
+            Console.WindowHeight = 40;
+            Console.WindowWidth = 80;
+            Console.BufferHeight = Console.WindowHeight;
         }
     }
 }
