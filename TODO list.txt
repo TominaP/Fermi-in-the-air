@@ -1,13 +1,26 @@
 1.Creating the plane
+//Contributor:
+
 
 2.Plane movements
+//Contributor:
+
 
 3.Collision detection
+//Contributor:
+
 
 4.Sound
+//Contributor:
+-play some background music 
+-play short sound when collision is detected (e.g. collecting coins)
 
 5.Design
+//Contributor:
+
 
 6.Input, Output(health,points)
+//Contributor:
+
 
 7. ...

@@ -1,0 +1,5 @@
+//Add any useful links for the project here
+
+http://unicode-table.com/en/#control-character //all UNICODE symbols
+
+http://stackoverflow.com/questions/3502311/how-to-play-a-sound-in-c-net //play music in c# (audio file needs to be .wav)
