@@ -38,13 +38,20 @@ public class GameObject
 
         GameObject obj = new GameObject();
 
-        for (int i = 0; i < 2; i++)
-        {
-            obj.GenerateObject();
-        }
-
         while (true)
         {
+            // adding chance to spawn @ 25%
+            Random rnd = new Random();
+            int chanceToSpawn = rnd.Next(0, 100);
+
+            if (chanceToSpawn <= 25)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects
+                obj.MoveObjects();
+                Thread.Sleep(200);
+            }
+
             obj.MoveObjects();
             Thread.Sleep(200);
         }
@@ -65,20 +72,12 @@ public class GameObject
     //generate object on top of the screen
     public void GenerateObject()
     {
+        //one object per line at least for now
+        //implement collision detection if needed later
         int objXPosition = 0;
         int objYPosition = rnd.Next(0, WindowWidth - objWidth);
-
-        //if not collision print object, else we call same method recursively
-        if (!CheckForCollision(objXPosition, objYPosition))
-        {
-            gameObjects.Enqueue(new Point(objXPosition, objYPosition));
-
-            PrintObject(objXPosition, objYPosition);
-        }
-        else
-        {
-            GenerateObject();
-        }
+        gameObjects.Enqueue(new Point(objXPosition, objYPosition));
+        PrintObject(objXPosition, objYPosition);
     }
 
     public bool CheckForCollision(int objXPosition, int objYPosition)
@@ -115,15 +114,18 @@ public class GameObject
 
             if (!CheckForCollision(newXPos, currentObject.Y))
             {
-                gameObjects.Enqueue(new Point(newXPos, currentObject.Y));
-                PrintObject(newXPos, currentObject.Y);
+                //keep object if in console range and no collision
+                if (newXPos <= 40 - objHeight)
+                {
+                    gameObjects.Enqueue(new Point(newXPos, currentObject.Y));
+                    PrintObject(newXPos, currentObject.Y);
+                }
             }
             else
             {
                 //object is destroyed and plane is hitted!
             }
         }
-
     }
 
     public void ClearObject(int xPos, int yPos)
@@ -138,7 +140,6 @@ public class GameObject
             }
         }
     }
-
 }
 
 
