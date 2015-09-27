@@ -21,6 +21,8 @@ namespace Movement
 
         private static int playerPositionX = WindowHeigth - 1;
 
+        private static int currentLives = 0;
+
         static void Main(string[] args)
         {
             Console.WindowHeight = WindowHeigth;
@@ -90,7 +92,7 @@ namespace Movement
         private static void InitializeHeader()
         {
             Console.SetCursorPosition(0, 0);
-            string header = "Current lives: ";
+            string header = string.Format("Current lives: {0}", currentLives);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(header.PadRight(Console.WindowWidth - 1));
             Console.ResetColor();
