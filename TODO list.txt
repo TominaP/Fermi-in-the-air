@@ -23,4 +23,8 @@
 //Contributor:
 
 
-7. ...
+7. Creating destroyable objects
+//Contributor:
+
+8. Creating collecting objects
+//Contributor:

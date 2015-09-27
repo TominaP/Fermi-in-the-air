@@ -1,18 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FermiInTheAir
+
+public class FermiInTheAir
 {
-    class FermiInTheAir
+    public class Settings
     {
-        static void Main(string[] args)
+        //default settings
+        public Settings()
         {
             Console.WindowHeight = 40;
             Console.WindowWidth = 80;
             Console.BufferHeight = Console.WindowHeight;
+            Console.BufferWidth = Console.WindowWidth;
+            Console.CursorVisible = false;
         }
+
+    }
+
+    public static void Main()
+    {
+        new Settings();
     }
 }
+
