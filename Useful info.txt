@@ -1,0 +1,14 @@
+//Add any useful links for the project here
+
+Objects design:
+http://unicode-table.com/en/#control-character //all UNICODE symbols
+http://www.dotnetperls.com/console-color //console colors and how they look
+
+
+Music and sounds:
+#backgroundMusic 
+http://stackoverflow.com/questions/3502311/how-to-play-a-sound-in-c-net //play music in c# (audio file needs to be .wav)
+http://www.dotnetperls.com/soundplayer //play music in c# (audio file needs to be .wav) -> more on the same subject
+
+#shortCollisionSound
+http://www.dotnetperls.com/beep //simple console sounds -> useful for collisions and effects
