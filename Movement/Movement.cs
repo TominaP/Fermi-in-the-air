@@ -72,7 +72,7 @@ namespace Movement
                     {
                         playerPositionY += 2;
 
-                        if (playerPositionY >= WindowWidth - PlaneWidth - 1)
+                        if (playerPositionY >= WindowWidth - PlaneWidth - 2)
                         {
                             playerPositionY = WindowWidth - PlaneWidth;
                         }
@@ -92,8 +92,10 @@ namespace Movement
                 Console.SetCursorPosition(playerPositionY, playerPositionX);
                 for (int j = 0; j < PlaneWidth; j++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("X");
                 }
+                Console.ResetColor();
                 Console.WriteLine();
             }
         }
