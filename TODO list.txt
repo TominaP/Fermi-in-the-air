@@ -1,0 +1,13 @@
+1.Creating the plane
+
+2.Plane movements
+
+3.Collision detection
+
+4.Sound
+
+5.Design
+
+6.Input, Output(health,points)
+
+7. ...
