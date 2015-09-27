@@ -32,6 +32,8 @@ namespace Movement
 
             InitializePlane(playerPositionX, playerPositionY);
 
+            InitializeHeader();
+
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -80,8 +82,18 @@ namespace Movement
 
                     Console.Clear();
                     InitializePlane(playerPositionX, playerPositionY);
+                    InitializeHeader();
                 }
             }
+        }
+
+        private static void InitializeHeader()
+        {
+            Console.SetCursorPosition(0, 0);
+            string header = "Current lives: ";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(header.PadRight(Console.WindowWidth - 1));
+            Console.ResetColor();
         }
 
         //Initializing the plane figure
