@@ -24,6 +24,13 @@
         public void Move()
         {
             this.UpLeftCorner.X++;
+
+            //this may be must check in collision metod
+            if (UpLeftCorner.X >= 40 - Height)
+            {
+                this.HaveCollision = true;
+                this.UpLeftCorner.X--;
+            }
         }  
     }
 }
