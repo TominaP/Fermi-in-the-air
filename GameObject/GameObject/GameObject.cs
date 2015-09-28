@@ -14,6 +14,95 @@ public class Settings
         Console.BufferWidth = Console.WindowWidth;
         Console.CursorVisible = false;
     }
+    
+      public static void Main()
+    {
+        //new Settings();
+        FrontPage();
+    }
+
+    public static void FrontPageElitsa()
+    {
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+
+        var nameGame1 = new[]
+        {
+            @"      _______  _______ .______      .___  ___.  __    ",
+            @"     |   ____||   ____||   _  \     |   \/   | |  |   ",
+            @"     |  |__   |  |__   |  |_)  |    |  \  /  | |  |   ",
+            @"     |   __|  |   __|  |      /     |  |\/|  | |  |   ",
+            @"     |  |     |  |____ |  |\  \----.|  |  |  | |  |   ",
+            @"     |__|     |_______|| _| `._____||__|  |__| |__|   ",
+
+
+        };
+
+
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+
+        var artGame = new[]
+        {
+          
+            @"                                                                                 ,o888      ",
+            @"                                                                              ,o888888'     ",
+            @"                            /\                         ,:o: o: oooo.        ,8O88Pd88       ",
+            @"                           (  )                     ,.::.::o:ooooOoOoO. ,oO8O8Pd888'        ",
+            @"                           (  )                   ,.:.::o:ooOoOoOO8O8OOo 8OOPd8O8O          ",
+            @"                          /|/\|\                 , ..:.::o:ooOoOOOO8OOOOo FdO8O8            ",
+            @"                         /_||||_\               , ..:.::o:ooOoOO8O888O8O,COCOO              ",
+            @"                                               , . ..:.::o:ooOoOOOO8OOOOCOCO                ",
+            @"                                                . ..:.::o:ooOoOoOO8O8OCCC Co                ",
+            @"            /\                                     . ..:.::o:ooooOoCoCCC o:o                ",
+            @"           (  )                                    . ..:.::o:o:,cooooCo oo:o:               ",
+            @"           (  )                                 `   . . ..:.:cocoooo 'o:o:::'               ",
+            @"          /|/\|\                                .`   . ..::ccccoc 'o:o:o:::'                ",
+            @"         /_||||_\                              :.:.    ,c: cccc ':.:.:.:.:.'                ",
+            @"                                               ..:.: '`::::c:'..:.:.:.:.:.'                 ",
+            @"                                             ...:.'.:.:::: '   . . . . .'                   ",
+            @"                                            .. . ....:. ' `   . . . ''                      ",
+            @"                                            . . ... '                                       ",
+            @"                                           . . ..                                           ",
+            @"                                          . .                                               ",
+
+         };
+
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+
+        var nameGame2 = new[]
+        {
+                @"    __  .__   __.    .___________. __    __   _______         ___       __  .______       ",
+                @"   |  | |  \ |  |    |           ||  |  |  | |   ____|       /   \     |  | |   _  \      ",
+                @"   |  | |   \|  |    `---|  |----`|  |__|  | |  |__         /  ^  \    |  | |  |_)  |     ",
+                @"   |  | |  . `  |        |  |     |   __   | |   __|       /  /_\  \   |  | |      /      ",
+                @"   |  | |  |\   |        |  |     |  |  |  | |  |____     /  _____  \  |  | |  |\  \----. ",
+                @"   |__| |__| \__|        |__|     |__|  |__| |_______|   /__/     \__\ |__| | _| `._____| ",
+        };
+
+
+
+
+
+        Console.WindowWidth = 140;
+        Console.WriteLine("\n\n");
+        foreach (string line in nameGame1)
+               Console.WriteLine(line);
+             
+        foreach (string line in artGame)
+            Console.WriteLine(line);
+            Console.WriteLine("\n");
+        foreach (string line in nameGame2)
+            Console.WriteLine(line);
+
+        System.Threading.Thread.Sleep(1000);
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        string msg = "ENTER if you dare !!!";
+        Console.WriteLine("\n \n \n \n {0, 50}", msg);
+        Console.ReadKey();
+
+    }
 }
 
 
