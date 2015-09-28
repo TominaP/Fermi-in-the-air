@@ -2,10 +2,7 @@
 using FermiInTheAir.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FermiInTheAir
 {
@@ -31,7 +28,7 @@ namespace FermiInTheAir
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
                     destoyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                    gameObjectLsit.Add(destoyObject);                   
+                    gameObjectLsit.Add(destoyObject);
                 }
 
                 if (chanceToSpawn <= 15)
@@ -41,20 +38,65 @@ namespace FermiInTheAir
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
                     gameObjectLsit.Add(collectObject);
                 }
-                
+
 
                 foreach (var obj in gameObjectLsit)
                 {
                     if (!obj.HaveCollision)
                     {
                         PrintGameObject.PrintObject(obj);
-                    }                   
+                    }
                 }
                 plane.Print();
 
 
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo direction = Console.ReadKey();
+                    plane.Clear();
+                    if (direction.Key == ConsoleKey.UpArrow)
+                    {
+                        plane.Position.X--;
 
-                //movement logic here
+                        if (plane.Position.X < 0)
+                        {
+                            plane.Position.X = 0;
+                        }
+                    }
+
+                    if (direction.Key == ConsoleKey.DownArrow)
+                    {
+                        plane.Position.X++;
+
+                        if (plane.Position.X >= settings.Height - plane.PlaneHeight)
+                        {
+                            plane.Position.X = settings.Height - plane.PlaneHeight - 1;
+                        }
+                    }
+
+                    if (direction.Key == ConsoleKey.LeftArrow)
+                    {
+                        plane.Position.Y--;
+
+                        if (plane.Position.Y < 0)
+                        {
+                            plane.Position.Y = 0;
+                        }
+                    }
+
+                    if (direction.Key == ConsoleKey.RightArrow)
+                    {
+                        plane.Position.Y++;
+
+                        if (plane.Position.Y >= settings.Width - plane.PlaneWidth)
+                        {
+                            plane.Position.Y = settings.Width - plane.PlaneWidth - 1;
+                        }
+                    }
+
+                    plane.Print();
+
+                }
 
                 foreach (var obj in gameObjectLsit)
                 {
@@ -72,3 +114,4 @@ namespace FermiInTheAir
         }
     }
 }
+
