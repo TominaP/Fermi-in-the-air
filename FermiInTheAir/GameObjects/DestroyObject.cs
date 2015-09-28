@@ -18,15 +18,7 @@ namespace FermiInTheAir.GameObjects
         {
 
         }
-
-        public override GameObject GenerateObject()
-        {
-            int objXPosition = 0;
-            int objYPosition = rnd.Next(0, Settings.Width - this.Width);
-            GameObject current = new DestroyObject(new Point(objXPosition, objYPosition));
-
-            return current;
-        }
+       
     }
 
 }

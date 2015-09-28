@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FermiInTheAir.GameObjects
+﻿namespace FermiInTheAir.GameObjects
 {
     public abstract class GameObject
     {
@@ -14,6 +8,7 @@ namespace FermiInTheAir.GameObjects
             this.Width = width;
             this.UpLeftCorner = pos;
             HaveCollision = false;
+            this.Symbol = symbol;
         }
 
         public int Height { get; set; }
@@ -26,48 +21,9 @@ namespace FermiInTheAir.GameObjects
 
         public char Symbol { get; set; }
 
-
-        public abstract GameObject GenerateObject();
-      
-
-        public void Move(GameObject obj)
+        public void Move()
         {
-            obj.UpLeftCorner.X++;
-        }
-
-        public void Print(GameObject obj)
-        {
-            int x = obj.UpLeftCorner.X;
-            int y = obj.UpLeftCorner.Y;
-
-            for (int i = x; i < x + this.Height; i++)
-            {
-                for (int j = y; j < y + this.Width; j++)
-                {
-                    Console.SetCursorPosition(j, i);
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(this.Symbol);
-                }
-            }
-        }
-
-        public void Clear(GameObject obj)
-        {
-            int x = obj.UpLeftCorner.X;
-            int y = obj.UpLeftCorner.Y;
-
-            for (int i = x; i < x + this.Height; i++)
-            {
-                for (int j = y; j < y + this.Width; j++)
-                {
-                    Console.SetCursorPosition(j, i);
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(' ');
-                }
-            }
-        }
-
-
-
+            this.UpLeftCorner.X++;
+        }  
     }
 }

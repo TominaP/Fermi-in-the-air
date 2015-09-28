@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FermiInTheAir
+﻿namespace FermiInTheAir
 {
-    class FermiMain
+   public class FermiMain
     {
-        static void Main()
+        public static void Main()
         {
+            Engine eng = new Engine();
+
+            eng.Run();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿public class Settings
 {
     public Settings()
-    {
+    {        
         Width = 80;
         Height = 40;
         Speed = 1;
@@ -9,13 +9,13 @@
         GameOver = false;
     }
 
-    public static int Width { get; set; }
+    public int Width { get; set; }
 
-    public static int Height { get; set; }
+    public int Height { get; set; }
 
-    public static int Speed { get; set; }
+    public int Speed { get; set; }
 
-    public static int Score { get; set; }
+    public int Score { get; set; }
     
-    public static bool GameOver { get; set; } 
+    public bool GameOver { get; set; } 
 }

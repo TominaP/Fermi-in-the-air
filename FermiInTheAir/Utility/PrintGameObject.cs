@@ -3,9 +3,9 @@ using System;
 
 namespace FermiInTheAir.Utility
 {
-    public class PrintGameObject
+    public static class PrintGameObject
     {
-        public void PrintObject(GameObject obj)
+        public static void PrintObject(GameObject obj)
         {
             int x = obj.UpLeftCorner.X;
             int y = obj.UpLeftCorner.Y;
@@ -21,7 +21,7 @@ namespace FermiInTheAir.Utility
             }
         }
 
-        public void ClearObject(GameObject obj)
+        public static void ClearObject(GameObject obj)
         {
             int x = obj.UpLeftCorner.X;
             int y = obj.UpLeftCorner.Y;

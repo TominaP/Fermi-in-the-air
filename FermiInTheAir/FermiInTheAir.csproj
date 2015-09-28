@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine.cs" />
     <Compile Include="FermiMain.cs" />
     <Compile Include="GameObjects\CollectedObject.cs" />
     <Compile Include="GameObjects\DestroyObject.cs" />
