@@ -111,6 +111,7 @@ namespace FermiInTheAir
 
                 Thread.Sleep(200);
             }
+            Settings.PrintGameOver();
         }
     }
 }
