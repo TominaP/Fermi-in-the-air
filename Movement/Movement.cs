@@ -1,11 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Movement
 {
+    public class ImperialMarch
+    {
+        private static string Source = "http://www.thesoundarchive.com/starwars/imperial_march.wav";
+
+        public ImperialMarch()
+        {
+            this.Play();
+        }
+
+        private void Play()
+        {
+            SoundPlayer player = new SoundPlayer(Source);
+
+            using (player)
+            {
+                player.PlayLooping();
+            }
+        }
+    }
+
     class Movement
     {
         //The size of the console can be easily changed by changing the constants below as well as the player's position
@@ -36,8 +57,11 @@ namespace Movement
 
             InitializeHeader();
 
+            ImperialMarch march = new ImperialMarch();
+
             while (true)
             {
+                
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo direction = Console.ReadKey();
