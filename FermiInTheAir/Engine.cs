@@ -14,6 +14,7 @@ namespace FermiInTheAir
         private HashSet<GameObject> gameObjectLsit = new HashSet<GameObject>();
         private Random rnd = new Random();
         Settings settings = new Settings();
+        Player plane = new Player();
         private DestroyObject destoyObject;
         private CollectedObject collectObject;
 
@@ -32,6 +33,7 @@ namespace FermiInTheAir
                     destoyObject = new DestroyObject(new Point(objXPosition, objYPosition));
                     gameObjectLsit.Add(destoyObject);                   
                 }
+
                 if (chanceToSpawn <= 15)
                 {
                     int objXPosition = 0;
@@ -46,11 +48,13 @@ namespace FermiInTheAir
                     if (!obj.HaveCollision)
                     {
                         PrintGameObject.PrintObject(obj);
-                    }
-                   
+                    }                   
                 }
+                plane.Print();
 
 
+
+                //movement logic here
 
                 foreach (var obj in gameObjectLsit)
                 {
