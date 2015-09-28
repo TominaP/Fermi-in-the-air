@@ -1,8 +1,11 @@
 //Add any useful links for the project here
 
 Objects design:
+http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20 //enter the game 
 http://unicode-table.com/en/#control-character //all UNICODE symbols
 http://www.dotnetperls.com/console-color //console colors and how they look
+http://ascii.gallery/art/tag/spaceship // some ideas how to draw a spaceship
+http://www.retrojunkie.com/asciiart/vehicles/rockets.htm
 
 
 Music and sounds:
