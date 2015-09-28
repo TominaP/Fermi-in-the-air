@@ -1,0 +1,65 @@
+using System;
+
+
+namespace Sounds
+{
+    class Sounds
+    {
+        static void Main()
+        {
+            bool crash = true;
+            if (crash == true)
+            {
+                Crash();   
+            }
+
+            bool shoot = false;
+            if (shoot == true)
+            {
+                Shoot();
+            }
+
+            bool levelup = false;
+            if (levelup == true)
+            {
+                LevelUp();
+            }
+
+            bool gameOver = false;
+            if (gameOver == true)
+            {
+                GameOver();
+            }
+
+        }
+        static void Crash()
+        {
+            Console.Beep(420, 115);
+            Console.Beep(420, 250);
+        }
+        static void Shoot()
+        {
+            Console.Beep(500, 200);
+        }
+        static void LevelUp()
+        {
+            Console.Beep(420, 100);
+            Console.Beep(500, 150);
+            Console.Beep(400, 80);
+            Console.Beep(300, 150);
+        }
+        static void GameOver()
+        {
+            Console.Beep(400, 80);
+            for (int i = 300; i < 800; i+=50)
+            {
+                Console.Beep(i, 50);
+            }
+            Console.Beep(600, 50);
+            Console.Beep(800, 50);
+            Console.Beep(600, 50);
+            Console.Beep(300, 50);
+            Console.Beep(300, 100);
+        }
+    }
+}
