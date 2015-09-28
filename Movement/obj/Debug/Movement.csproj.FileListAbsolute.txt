@@ -4,3 +4,6 @@ c:\users\user\documents\visual studio 2013\Projects\CSharp-TeamProject\Movement\
 c:\users\user\documents\visual studio 2013\Projects\CSharp-TeamProject\Movement\bin\Debug\Movement.pdb
 c:\users\user\documents\visual studio 2013\Projects\CSharp-TeamProject\Movement\obj\Debug\Movement.exe
 c:\users\user\documents\visual studio 2013\Projects\CSharp-TeamProject\Movement\obj\Debug\Movement.pdb
+D:\Programirane\Fermi-in-the-air\Movement\bin\Debug\Movement.exe.config
+D:\Programirane\Fermi-in-the-air\Movement\obj\Debug\Movement.exe
+D:\Programirane\Fermi-in-the-air\Movement\obj\Debug\Movement.pdb

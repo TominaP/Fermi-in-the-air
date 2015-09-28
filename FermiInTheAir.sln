@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FermiInTheAir", "FermiInTheAir\FermiInTheAir.csproj", "{593CF5AE-1DA7-4D09-8080-7A88DD5CB054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{593CF5AE-1DA7-4D09-8080-7A88DD5CB054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593CF5AE-1DA7-4D09-8080-7A88DD5CB054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{593CF5AE-1DA7-4D09-8080-7A88DD5CB054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{593CF5AE-1DA7-4D09-8080-7A88DD5CB054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
