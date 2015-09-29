@@ -9,10 +9,12 @@ namespace FermiInTheAir.Utility
     public class OpeningPage
     {
         public static ConsoleColor planeColor = ConsoleColor.Red;
+        public static bool planeOneIsSelected = true; //by default
+        public static bool planeTwoIsSelected = false;
         public static void OpenPage()
         {
             Header();
-            
+
             string teamName = "FERMI";
             string game = "in the air";
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -23,9 +25,9 @@ namespace FermiInTheAir.Utility
             Console.WriteLine("{0}<< Press <Enter> to start a new game >>",
                 new string(' ', (80 - "<< Press <Enter> to start a new game >>".Length - 1) / 2));
             WriteLines(3);
-            
-            Console.WriteLine(new string(' ', (80 - "<< Press <p> to change plane >> (under construction)".Length - 1) / 2)
-                + "<< Press <p> to change plane >> (under construction)");
+
+            Console.WriteLine(new string(' ', (80 - "<< Press <p> to change plane >>".Length - 1) / 2)
+                + "<< Press <p> to change plane >>");
             WriteLines(3);
 
             Console.WriteLine(new string(' ', (80 - "<< Press <c> to change plane's color >>".Length - 1) / 2)
@@ -51,7 +53,7 @@ namespace FermiInTheAir.Utility
                 }
                 else if (action.Key == ConsoleKey.P)
                 {
-                    SelectPlane(); // TODO
+                    SelectPlane();
                 }
             }
 
@@ -59,7 +61,70 @@ namespace FermiInTheAir.Utility
 
         private static void SelectPlane()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            while (true)
+            {
+                WriteLines(11);
+                Console.WriteLine(new string(' ', 20) + "Plane #1: <<Press <1> to select this plane.>>");
+                Console.WriteLine();
+                Console.ForegroundColor = planeColor;
+                Console.WriteLine(new string(' ', 35) + "       []");
+                Console.WriteLine(new string(' ', 35) + " _____[  ]_____");
+                Console.WriteLine(new string(' ', 35) + @"/___[FERMI]____\");
+                Console.WriteLine(new string(' ', 35) + "      [  ]");
+                Console.WriteLine(new string(' ', 35) + "     --[]--");
+                Console.ResetColor();
+                WriteLines(6);
+
+                Console.WriteLine(new string(' ', 20) + "Plane #2: <<Press <2> to select this plane.>>");
+                Console.WriteLine();
+                Console.ForegroundColor = planeColor;
+
+                Console.WriteLine(new string(' ', 35) + "        |");
+                Console.WriteLine(new string(' ', 35) + "       +++");
+                Console.WriteLine(new string(' ', 35) + "     #=====#");
+                Console.WriteLine(new string(' ', 35) + "******************");
+                Console.WriteLine(new string(' ', 35) + "******************");
+                Console.WriteLine(new string(' ', 35) + "     #######");
+                Console.WriteLine(new string(' ', 35) + "  //    ||    \\");
+                Console.ResetColor();
+
+                ConsoleKeyInfo action = Console.ReadKey();
+                Console.Clear();
+                if (action.Key == ConsoleKey.NumPad1 || action.Key == ConsoleKey.D1)
+                {
+                    planeTwoIsSelected = false;
+                    planeOneIsSelected = true;
+                }
+                else if (action.Key == ConsoleKey.NumPad2 || action.Key == ConsoleKey.D2)
+                {
+                    planeOneIsSelected = false;
+                    planeTwoIsSelected = true;
+                }
+
+                WriteLines(16);
+                Console.WriteLine("\t\t\tYou have chosen this plane #" + action.KeyChar);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                WriteLines(3);
+                Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
+                Console.WriteLine();
+                Console.WriteLine("\t\t\t<< Press <m> to go to main menu >>");
+                action = Console.ReadKey();
+                if (action.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Engine eng = new Engine();
+                    eng.Run();
+                }
+                else if (action.Key == ConsoleKey.M)
+                {
+                    Console.Clear();
+                    OpeningPage.OpenPage();
+                }
+
+                Console.ResetColor();
+                Console.Clear();
+            }
         }
 
         private static void WriteLines(int lines)
