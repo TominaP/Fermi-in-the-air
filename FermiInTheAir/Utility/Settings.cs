@@ -9,10 +9,24 @@ public class Settings
         Speed = 1;
         Score = 0;
         GameOver = false;
+        this.Pause = false;
         Console.SetWindowSize(Width, Height);
         Console.SetBufferSize(Width, Height);
         Console.CursorVisible = false;
     }
+
+    public int Width { get; set; }
+
+    public int Height { get; set; }
+
+    public int Speed { get; set; }
+
+    public int Score { get; set; }
+
+    public bool GameOver { get; set; }
+
+    public bool Pause { get; set; }
+
     public static void WriteLines(int times)
     {
         for (int i = 0; i < times; i++)
@@ -49,13 +63,5 @@ public class Settings
         }
     }
 
-    public int Width { get; set; }
-
-    public int Height { get; set; }
-
-    public int Speed { get; set; }
-
-    public int Score { get; set; }
-    
-    public bool GameOver { get; set; } 
+   
 }

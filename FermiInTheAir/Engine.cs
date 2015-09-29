@@ -8,29 +8,36 @@ namespace FermiInTheAir
 {
     public class Engine
     {
-        private HashSet<GameObject> gameObjectsList = new HashSet<GameObject>();
+        private Queue<GameObject> gameObjectsList = new Queue<GameObject>();
+        private Queue<GameObject> newGameObjecstLsit = new Queue<GameObject>();
+
         private HashSet<Projectile> projectilesFired = new HashSet<Projectile>();
+
         private Random rnd = new Random();
         Settings settings = new Settings();
         Player plane = new Player();
         private DestroyObject destroyObject;
         private CollectedObject collectObject;
+        private GameObject current;
         private Projectile projectile;
+        private int sleepTime = 300;
 
         public void Run()
         {
+            plane.Print();
+
             while (!settings.GameOver)
             {
                 // adding chance to spawn @ 25%               
                 int chanceToSpawn = rnd.Next(0, 100);
 
 
-                if (chanceToSpawn <= 40)
+                if (chanceToSpawn <= 80)
                 {
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
                     destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                    gameObjectsList.Add(destroyObject);
+                    gameObjectsList.Enqueue(destroyObject);
                 }
 
                 if (chanceToSpawn <= 15)
@@ -38,25 +45,34 @@ namespace FermiInTheAir
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 1);
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
-                    gameObjectsList.Add(collectObject);
+                    gameObjectsList.Enqueue(collectObject);
                 }
 
 
-                foreach (var obj in gameObjectsList)
+                while (gameObjectsList.Count > 0)
                 {
-                    if (!obj.HaveCollision)
+                    current = gameObjectsList.Dequeue();
+
+                    if (!current.HaveCollision)
                     {
-                        PrintGameObject.PrintObject(obj);
+                        PrintGameObject.PrintObject(current);
+                        newGameObjecstLsit.Enqueue(current);
                     }
                 }
-                plane.Print();
+               
+                gameObjectsList = newGameObjecstLsit;
+                newGameObjecstLsit = new Queue<GameObject>();
 
 
-                if (Console.KeyAvailable)
+
+
+                while (Console.KeyAvailable)
                 {
-                    ConsoleKeyInfo direction = Console.ReadKey();
+                    ConsoleKeyInfo keyPressed = Console.ReadKey();
+
                     plane.Clear();
-                    if (direction.Key == ConsoleKey.UpArrow)
+
+                    if (keyPressed.Key == ConsoleKey.UpArrow)
                     {
                         plane.Position.X--;
 
@@ -66,7 +82,7 @@ namespace FermiInTheAir
                         }
                     }
 
-                    if (direction.Key == ConsoleKey.DownArrow)
+                    if (keyPressed.Key == ConsoleKey.DownArrow)
                     {
                         plane.Position.X++;
 
@@ -76,7 +92,7 @@ namespace FermiInTheAir
                         }
                     }
 
-                    if (direction.Key == ConsoleKey.LeftArrow)
+                    if (keyPressed.Key == ConsoleKey.LeftArrow)
                     {
                         plane.Position.Y--;
 
@@ -86,7 +102,7 @@ namespace FermiInTheAir
                         }
                     }
 
-                    if (direction.Key == ConsoleKey.RightArrow)
+                    if (keyPressed.Key == ConsoleKey.RightArrow)
                     {
                         plane.Position.Y++;
 
@@ -96,7 +112,7 @@ namespace FermiInTheAir
                         }
                     }
 
-                    if (direction.Key == ConsoleKey.Spacebar)
+                    if (keyPressed.Key == ConsoleKey.Spacebar)
                     {
                         // must add type to GameObject class, so that projectiles move upwards
                         projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
@@ -104,9 +120,20 @@ namespace FermiInTheAir
                         PrintGameObject.PrintObject(projectile);
                     }
 
+                    if (keyPressed.Key == ConsoleKey.P)
+                    {
+                        //TODO : Print pause screen
+                        settings.Pause = !settings.Pause;
+                        Console.ReadKey();
+                    }
+
+
                     plane.Print();
 
                 }
+
+                
+
 
                 foreach (var projectile in projectilesFired)
                 {
@@ -121,18 +148,26 @@ namespace FermiInTheAir
                     }
                 }
 
-                foreach (var obj in gameObjectsList)
+                while (gameObjectsList.Count > 0)
                 {
-                    PrintGameObject.ClearObject(obj);
-                    obj.Move();
-                    if (!obj.HaveCollision)
+                    current = gameObjectsList.Dequeue();
+                    PrintGameObject.ClearObject(current);
+                    current.Move();
+
+                    if (!current.HaveCollision)
                     {
-                        PrintGameObject.PrintObject(obj);
+                        PrintGameObject.PrintObject(current);
+                        newGameObjecstLsit.Enqueue(current);
                     }
                 }
 
-                Thread.Sleep(200);
+                gameObjectsList = newGameObjecstLsit;
+                newGameObjecstLsit = new Queue<GameObject>();
+               
+
+                Thread.Sleep(sleepTime);
             }
+
             Settings.PrintGameOver();
         }
     }
