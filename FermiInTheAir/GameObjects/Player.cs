@@ -52,7 +52,7 @@ namespace FermiInTheAir.GameObjects
             int x = this.Position.X;
             int y = this.Position.Y;
             Console.SetCursorPosition(y+9, x);
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = FermiInTheAir.Utility.OpeningPage.planeColor;
             Console.WriteLine("[]");
             Console.SetCursorPosition(y+2, x+1);
             Console.WriteLine("______[  ]______");
