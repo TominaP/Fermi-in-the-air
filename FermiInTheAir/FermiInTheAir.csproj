@@ -46,6 +46,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="FermiMain.cs" />
     <Compile Include="GameObjects\CollectedObject.cs" />
+    <Compile Include="GameObjects\Projectile.cs" />
     <Compile Include="GameObjects\DestroyObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Player.cs" />
