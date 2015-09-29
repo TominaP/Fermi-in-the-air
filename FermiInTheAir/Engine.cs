@@ -74,7 +74,7 @@ namespace FermiInTheAir
 
                     if (keyPressed.Key == ConsoleKey.UpArrow)
                     {
-                        plane.Position.X-=3;
+                        plane.Position.X--;
 
                         if (plane.Position.X < 0)
                         {
@@ -84,7 +84,7 @@ namespace FermiInTheAir
 
                     if (keyPressed.Key == ConsoleKey.DownArrow)
                     {
-                        plane.Position.X+=3;
+                        plane.Position.X++;
 
                         if (plane.Position.X >= settings.Height - plane.PlaneHeight)
                         {
@@ -94,7 +94,7 @@ namespace FermiInTheAir
 
                     if (keyPressed.Key == ConsoleKey.LeftArrow)
                     {
-                        plane.Position.Y-=5;
+                        plane.Position.Y--;
 
                         if (plane.Position.Y < 0)
                         {
@@ -104,7 +104,7 @@ namespace FermiInTheAir
 
                     if (keyPressed.Key == ConsoleKey.RightArrow)
                     {
-                        plane.Position.Y+=5;
+                        plane.Position.Y++;
 
                         if (plane.Position.Y >= settings.Width - plane.PlaneWidth)
                         {
