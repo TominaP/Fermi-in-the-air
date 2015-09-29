@@ -12,7 +12,7 @@ namespace FermiInTheAir.GameObjects
 
         private const int WindowWidth = 80;
 
-        private const int planeWidth = 10;
+        private const int planeWidth = 20;
 
         private const int planeHeigth = 5;
 
@@ -51,16 +51,25 @@ namespace FermiInTheAir.GameObjects
         {
             int x = this.Position.X;
             int y = this.Position.Y;
+            Console.SetCursorPosition(y, x);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("         []");
+            Console.WriteLine(new string(' ', y) + "  ______[  ]______");
+            Console.WriteLine(new string(' ', y) + @" /_____[FERMI]____\");
+            Console.WriteLine(new string(' ', y) + "        [  ]");
+            Console.WriteLine(new string(' ', y) + "       --[]--");
+            Console.ResetColor();
 
-            for (int i = x; i < x + planeHeigth; i++)
-            {
-                for (int j = y; j < y + planeWidth; j++)
-                {
-                    Console.SetCursorPosition(j, i);
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write('x');
-                }
-            }
+           //
+           // for (int i = x; i < x + planeHeigth; i++)
+           // {
+           //     for (int j = y; j < y + planeWidth; j++)
+           //     {
+           //         Console.SetCursorPosition(j, i);
+           //         Console.ForegroundColor = ConsoleColor.Blue;
+           //         Console.Write('x');
+           //     }
+           // }
         }
 
         public void Clear()

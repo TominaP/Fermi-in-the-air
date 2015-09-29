@@ -6,9 +6,9 @@ namespace FermiInTheAir
     {
         public static void Main()
         {
-            Music playMusic = new Music();
-            Thread music = new Thread(playMusic.Play);
-            music.Start();
+            //Music playMusic = new Music();
+            //Thread music = new Thread(playMusic.Play);
+            //music.Start();
 
             Engine eng = new Engine();
             eng.Run();

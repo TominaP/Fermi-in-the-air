@@ -23,7 +23,11 @@ namespace FermiInTheAir.Utility
                     for (int j = y; j < y + obj.Width; j++)
                     {
                         Console.SetCursorPosition(j, i);
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        if (obj.Symbol == '$')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                        }
+                        else Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(obj.Symbol);
                     }
                 }
