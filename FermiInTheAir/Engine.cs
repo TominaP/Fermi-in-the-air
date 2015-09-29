@@ -8,12 +8,13 @@ namespace FermiInTheAir
 {
     public class Engine
     {
-        private HashSet<GameObject> gameObjectLsit = new HashSet<GameObject>();
+        private HashSet<GameObject> gameObjectsList = new HashSet<GameObject>();
         private Random rnd = new Random();
         Settings settings = new Settings();
         Player plane = new Player();
         private DestroyObject destoyObject;
         private CollectedObject collectObject;
+        private Projectile projectile;
 
         public void Run()
         {
@@ -28,7 +29,7 @@ namespace FermiInTheAir
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
                     destoyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                    gameObjectLsit.Add(destoyObject);
+                    gameObjectsList.Add(destoyObject);
                 }
 
                 if (chanceToSpawn <= 15)
@@ -36,11 +37,11 @@ namespace FermiInTheAir
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 1);
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
-                    gameObjectLsit.Add(collectObject);
+                    gameObjectsList.Add(collectObject);
                 }
 
 
-                foreach (var obj in gameObjectLsit)
+                foreach (var obj in gameObjectsList)
                 {
                     if (!obj.HaveCollision)
                     {
@@ -94,11 +95,19 @@ namespace FermiInTheAir
                         }
                     }
 
+                    if (direction.Key == ConsoleKey.Spacebar)
+                    {
+                        // must add type to GameObject class, so that projectiles move upwards
+                        projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
+                        gameObjectsList.Add(projectile);
+                        PrintGameObject.PrintObject(projectile);
+                    }
+
                     plane.Print();
 
                 }
 
-                foreach (var obj in gameObjectLsit)
+                foreach (var obj in gameObjectsList)
                 {
                     PrintGameObject.ClearObject(obj);
                     obj.Move();
