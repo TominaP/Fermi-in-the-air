@@ -51,13 +51,17 @@ namespace FermiInTheAir.GameObjects
         {
             int x = this.Position.X;
             int y = this.Position.Y;
-            Console.SetCursorPosition(y, x);
+            Console.SetCursorPosition(y+9, x);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("         []");
-            Console.WriteLine(new string(' ', y) + "  ______[  ]______");
-            Console.WriteLine(new string(' ', y) + @" /_____[FERMI]____\");
-            Console.WriteLine(new string(' ', y) + "        [  ]");
-            Console.WriteLine(new string(' ', y) + "       --[]--");
+            Console.WriteLine("[]");
+            Console.SetCursorPosition(y+2, x+1);
+            Console.WriteLine("______[  ]______");
+            Console.SetCursorPosition(y+1, x+2);
+            Console.WriteLine(@"/_____[FERMI]____\");
+            Console.SetCursorPosition(y+8, x+3);
+            Console.WriteLine("[  ]");
+            Console.SetCursorPosition(y+7, x+4);
+            Console.WriteLine("--[]--");
             Console.ResetColor();
 
            //
