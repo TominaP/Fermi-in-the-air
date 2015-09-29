@@ -9,10 +9,11 @@ namespace FermiInTheAir
     public class Engine
     {
         private HashSet<GameObject> gameObjectsList = new HashSet<GameObject>();
+        private HashSet<Projectile> projectilesFired = new HashSet<Projectile>();
         private Random rnd = new Random();
         Settings settings = new Settings();
         Player plane = new Player();
-        private DestroyObject destoyObject;
+        private DestroyObject destroyObject;
         private CollectedObject collectObject;
         private Projectile projectile;
 
@@ -28,8 +29,8 @@ namespace FermiInTheAir
                 {
                     int objXPosition = 0;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
-                    destoyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                    gameObjectsList.Add(destoyObject);
+                    destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
+                    gameObjectsList.Add(destroyObject);
                 }
 
                 if (chanceToSpawn <= 15)
@@ -99,12 +100,25 @@ namespace FermiInTheAir
                     {
                         // must add type to GameObject class, so that projectiles move upwards
                         projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
-                        gameObjectsList.Add(projectile);
+                        projectilesFired.Add(projectile);
                         PrintGameObject.PrintObject(projectile);
                     }
 
                     plane.Print();
 
+                }
+
+                foreach (var projectile in projectilesFired)
+                {
+                    if (projectile.UpLeftCorner.X >= 0)
+                    {
+                        PrintGameObject.ClearObject(projectile);
+                        projectile.Move();
+                        if (projectile.UpLeftCorner.X > 0)
+                        {
+                            PrintGameObject.PrintObject(projectile);
+                        }
+                    }
                 }
 
                 foreach (var obj in gameObjectsList)
@@ -115,7 +129,6 @@ namespace FermiInTheAir
                     {
                         PrintGameObject.PrintObject(obj);
                     }
-
                 }
 
                 Thread.Sleep(200);

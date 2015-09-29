@@ -18,11 +18,7 @@ namespace FermiInTheAir.GameObjects
         {
             this.UpLeftCorner.X--;
 
-            if (UpLeftCorner.X <= 0 - Height)
-            {
-                this.UpLeftCorner.X--;
-            }
-            else if (HaveCollision)
+            if (HaveCollision)
             {
                 // play sound + add score + destroy both object and projectile
             }
