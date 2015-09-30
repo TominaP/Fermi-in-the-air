@@ -11,8 +11,105 @@ namespace FermiInTheAir.Utility
         public static ConsoleColor planeColor = ConsoleColor.Red;
         public static bool planeOneIsSelected = true; //by default
         public static bool planeTwoIsSelected = false;
+        public static bool planeThreeIsSelected = false;
+
+        public static void FrontPageGameName()
+        {
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+
+            var nameGame1 = new[]
+            {
+            @"      _______  _______ .______      .___  ___.  __    ",
+            @"     |   ____||   ____||   _  \     |   \/   | |  |   ",
+            @"     |  |__   |  |__   |  |_)  |    |  \  /  | |  |   ",
+            @"     |   __|  |   __|  |      /     |  |\/|  | |  |   ",
+            @"     |  |     |  |____ |  |\  \----.|  |  |  | |  |   ",
+            @"     |__|     |_______|| _| `._____||__|  |__| |__|   ",
+
+
+            };
+
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+
+            var artGame = new[]
+            {
+
+                @"                                                                                 ,o888      ",
+                @"                                                                              ,o888888'     ",
+                @"                            /\                         ,:o: o: oooo.        ,8O88Pd88       ",
+                @"                           (  )                     ,.::.::o:ooooOoOoO. ,oO8O8Pd888'        ",
+                @"                           (  )                   ,.:.::o:ooOoOoOO8O8OOo 8OOPd8O8O          ",
+                @"                          /|/\|\                 , ..:.::o:ooOoOOOO8OOOOo FdO8O8            ",
+                @"                         /_||||_\               , ..:.::o:ooOoOO8O888O8O,COCOO              ",
+                @"                                               , . ..:.::o:ooOoOOOO8OOOOCOCO                ",
+                @"                                                . ..:.::o:ooOoOoOO8O8OCCC Co                ",
+                @"            /\                                     . ..:.::o:ooooOoCoCCC o:o                ",
+                @"           (  )                                    . ..:.::o:o:,cooooCo oo:o:               ",
+                @"           (  )                                 `   . . ..:.:cocoooo 'o:o:::'               ",
+                @"          /|/\|\                                .`   . ..::ccccoc 'o:o:o:::'                ",
+                @"         /_||||_\                              :.:.    ,c: cccc ':.:.:.:.:.'                ",
+                @"                                               ..:.: '`::::c:'..:.:.:.:.:.'                 ",
+                @"                                             ...:.'.:.:::: '   . . . . .'                   ",
+                @"                                            .. . ....:. ' `   . . . ''                      ",
+                @"                                            . . ... '                                       ",
+                @"                                           . . ..                                           ",
+                @"                                          . .                                               ",
+
+            };
+
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+
+            var nameGame2 = new[]
+            {
+                @"    __  .__   __.    .___________. __    __   _______         ___       __  .______       ",
+                @"   |  | |  \ |  |    |           ||  |  |  | |   ____|       /   \     |  | |   _  \      ",
+                @"   |  | |   \|  |    `---|  |----`|  |__|  | |  |__         /  ^  \    |  | |  |_)  |     ",
+                @"   |  | |  . `  |        |  |     |   __   | |   __|       /  /_\  \   |  | |      /      ",
+                @"   |  | |  |\   |        |  |     |  |  |  | |  |____     /  _____  \  |  | |  |\  \----. ",
+                @"   |__| |__| \__|        |__|     |__|  |__| |_______|   /__/     \__\ |__| | _| `._____| ",
+            };
+
+            Console.WindowWidth = 140;
+            Console.WriteLine("\n");
+            foreach (string line in nameGame1)
+                Console.WriteLine(line);
+
+            foreach (string line in artGame)
+                Console.WriteLine(line);
+            Console.WriteLine("\n");
+            foreach (string line in nameGame2)
+                Console.WriteLine(line);
+
+            System.Threading.Thread.Sleep(1000);
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            string msg = "Press <ENTER> ... if you dare !!!";
+            Console.WriteLine("\n \n {0, 50}", msg);
+            Console.ReadKey();
+
+            while (true)
+            {
+                ConsoleKeyInfo action = Console.ReadKey();
+                if (action.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    OpeningPage.OpenPage();
+                }
+
+            }
+
+        }
+
+
         public static void OpenPage()
         {
+            Console.WindowWidth = 80;
+            Console.WindowHeight = 40;
+            Console.BufferHeight = Console.WindowHeight;
+            Console.BufferWidth = Console.WindowWidth;
+
             Header();
 
             string teamName = "FERMI";
@@ -88,6 +185,20 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine(new string(' ', 35) + "     #######");
                 Console.WriteLine(new string(' ', 35) + "  //    ||    \\");
                 Console.ResetColor();
+                WriteLines(6);
+
+                Console.WriteLine(new string(' ', 20) + "Plane #3: <<Press <3> to select this plane.>>");
+                Console.WriteLine();
+                Console.ForegroundColor = planeColor;
+
+                Console.WriteLine(new string(' ', 35) + @"         ^");
+                Console.WriteLine(new string(' ', 35) + @"        (*)");
+                Console.WriteLine(new string(' ', 35) + @"        (*)");
+                Console.WriteLine(new string(' ', 35) + @"       // \\");
+                Console.WriteLine(new string(' ', 35) + @"      /|/*\|\");
+                Console.WriteLine(new string(' ', 35) + @"     /_FERMI_\");
+                Console.WriteLine(new string(' ', 35) + @"     \/     \/");
+                Console.ResetColor();
 
                 ConsoleKeyInfo action = Console.ReadKey();
                 Console.Clear();
@@ -95,11 +206,19 @@ namespace FermiInTheAir.Utility
                 {
                     planeTwoIsSelected = false;
                     planeOneIsSelected = true;
+                    planeThreeIsSelected = false;
                 }
                 else if (action.Key == ConsoleKey.NumPad2 || action.Key == ConsoleKey.D2)
                 {
                     planeOneIsSelected = false;
                     planeTwoIsSelected = true;
+                    planeThreeIsSelected = false;
+                }
+                else if (action.Key == ConsoleKey.NumPad3 || action.Key == ConsoleKey.D3)
+                {
+                    planeOneIsSelected = false;
+                    planeTwoIsSelected = false;
+                    planeThreeIsSelected = true;
                 }
 
                 WriteLines(16);

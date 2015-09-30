@@ -58,6 +58,10 @@ namespace FermiInTheAir.GameObjects
             {
                 return 17;
             }
+            else if (OpeningPage.planeThreeIsSelected)
+            {
+                return 16;
+            }
             return 0;
         }
 
@@ -69,6 +73,10 @@ namespace FermiInTheAir.GameObjects
                 return 5;
             }
             else if (OpeningPage.planeTwoIsSelected)
+            {
+                return 7;
+            }
+            else if (OpeningPage.planeThreeIsSelected)
             {
                 return 7;
             }
@@ -131,6 +139,26 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("#######");
                 Console.SetCursorPosition(y + 2, x + 6);
                 Console.WriteLine("//    ||    \\");
+                Console.ResetColor();
+            }
+            else if (OpeningPage.planeThreeIsSelected)
+            {
+                Console.SetCursorPosition(y + 4, x);
+                Console.WriteLine(@"^");
+                Console.SetCursorPosition(y + 3, x + 1);
+                Console.WriteLine(@"(*)");
+                Console.SetCursorPosition(y + 3, x + 2);
+                Console.WriteLine(@"(*)");
+                Console.SetCursorPosition(y + 2, x + 3);
+                Console.WriteLine(@"// \\");
+                Console.SetCursorPosition(y + 1, x + 4);
+                Console.WriteLine(@"/|/*\|\");
+                Console.SetCursorPosition(y, x + 5);
+                Console.WriteLine(@"/_FERMI_\");
+                Console.SetCursorPosition(y, x + 6);
+                Console.WriteLine(@"\/     \/");
+
+
             }
         }
 

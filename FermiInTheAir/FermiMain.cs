@@ -3,7 +3,7 @@ using System;
 
 namespace FermiInTheAir
 {
-   public class FermiMain
+    public class FermiMain
     {
         public static void Main()
         {
@@ -12,10 +12,10 @@ namespace FermiInTheAir
             Console.BufferWidth = Console.WindowWidth;
 
             Console.CursorVisible = false;
-            Music playMusic = new Music();
-            Thread music = new Thread(playMusic.Play);
-            music.Start();
-
+            //Music playMusic = new Music();
+            //Thread music = new Thread(playMusic.Play);
+            //music.Start();
+            FermiInTheAir.Utility.OpeningPage.FrontPageGameName();
             FermiInTheAir.Utility.OpeningPage.OpenPage();
 
             Engine eng = new Engine();
