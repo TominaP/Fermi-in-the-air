@@ -9,9 +9,11 @@ namespace FermiInTheAir
     public class Engine
     {
         private Queue<GameObject> gameObjectsList = new Queue<GameObject>();
-        private Queue<GameObject> newGameObjecstLsit = new Queue<GameObject>();
+        private Queue<GameObject> newGameObjectsList = new Queue<GameObject>();
 
-        private HashSet<Projectile> projectilesFired = new HashSet<Projectile>();
+        private Queue<Projectile> projectilesFired = new Queue<Projectile>();
+        private Queue<Projectile> projectilesInAir = new Queue<Projectile>();
+
 
         private Random rnd = new Random();
         Settings settings = new Settings();
@@ -56,14 +58,12 @@ namespace FermiInTheAir
                     if (!current.HaveCollision)
                     {
                         PrintGameObject.PrintObject(current);
-                        newGameObjecstLsit.Enqueue(current);
+                        newGameObjectsList.Enqueue(current);
                     }
                 }
                
-                gameObjectsList = newGameObjecstLsit;
-                newGameObjecstLsit = new Queue<GameObject>();
-
-
+                gameObjectsList = newGameObjectsList;
+                newGameObjectsList = new Queue<GameObject>();
 
 
                 while (Console.KeyAvailable)
@@ -114,9 +114,8 @@ namespace FermiInTheAir
 
                     if (keyPressed.Key == ConsoleKey.Spacebar)
                     {
-                        // must add type to GameObject class, so that projectiles move upwards
                         projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
-                        projectilesFired.Add(projectile);
+                        projectilesFired.Enqueue(projectile);
                         PrintGameObject.PrintObject(projectile);
                     }
 
@@ -132,21 +131,39 @@ namespace FermiInTheAir
 
                 }
 
-                
 
-
-                foreach (var projectile in projectilesFired)
+                while (projectilesFired.Count > 0)
                 {
-                    if (projectile.UpLeftCorner.X >= 0)
+                    Projectile current = projectilesFired.Dequeue();
+                    PrintGameObject.ClearObject(current);
+                    current.Move();
+
+                    if (!current.HaveCollision)
                     {
-                        PrintGameObject.ClearObject(projectile);
-                        projectile.Move();
-                        if (projectile.UpLeftCorner.X > 0)
-                        {
-                            PrintGameObject.PrintObject(projectile);
-                        }
+                        PrintGameObject.PrintObject(current);
+                        projectilesInAir.Enqueue(current);
                     }
                 }
+
+                projectilesFired = projectilesInAir;
+                projectilesInAir = new Queue<Projectile>();
+
+
+                //foreach (var projectile in projectilesFired)
+                //{
+                //    if (projectile.UpLeftCorner.X >= 0)
+                //    {
+                //        PrintGameObject.ClearObject(projectile);
+                //        projectile.Move();
+                //        if (projectile.UpLeftCorner.X > 0)
+                //        {
+                //            PrintGameObject.PrintObject(projectile);
+                //        }
+                //    }
+                //}
+
+
+
 
                 while (gameObjectsList.Count > 0)
                 {
@@ -157,12 +174,12 @@ namespace FermiInTheAir
                     if (!current.HaveCollision)
                     {
                         PrintGameObject.PrintObject(current);
-                        newGameObjecstLsit.Enqueue(current);
+                        newGameObjectsList.Enqueue(current);
                     }
                 }
 
-                gameObjectsList = newGameObjecstLsit;
-                newGameObjecstLsit = new Queue<GameObject>();
+                gameObjectsList = newGameObjectsList;
+                newGameObjectsList = new Queue<GameObject>();
                
 
                 Thread.Sleep(sleepTime);
