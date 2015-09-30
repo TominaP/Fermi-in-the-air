@@ -50,15 +50,15 @@ namespace FermiInTheAir.GameObjects
 
         private static int GetPlaneWidth()
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 return 20;
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
             {
                 return 17;
             }
-            else if (OpeningPage.planeThreeIsSelected)
+            else if (PlaneSettings.planeThreeIsSelected)
             {
                 return 16;
             }
@@ -68,15 +68,15 @@ namespace FermiInTheAir.GameObjects
 
         private static int GetPlaneHeight()
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 return 5;
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
             {
                 return 7;
             }
-            else if (OpeningPage.planeThreeIsSelected)
+            else if (PlaneSettings.planeThreeIsSelected)
             {
                 return 7;
             }
@@ -88,7 +88,7 @@ namespace FermiInTheAir.GameObjects
         {
             int x = this.Position.X;
             int y = this.Position.Y;
-            Console.ForegroundColor = OpeningPage.planeColor;
+            Console.ForegroundColor = PlaneSettings.planeColor;
             PrintSelectedPlane(x, y);
 
 
@@ -107,7 +107,7 @@ namespace FermiInTheAir.GameObjects
 
         private void PrintSelectedPlane(int x, int y)
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 Console.SetCursorPosition(y + 9, x);
                 Console.WriteLine("[]");
@@ -121,7 +121,7 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("--[]--");
                 Console.ResetColor();
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
             {
                 //planeHeigth = 7;
                 //planeWidth = 15;
@@ -141,7 +141,7 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("//    ||    \\");
                 Console.ResetColor();
             }
-            else if (OpeningPage.planeThreeIsSelected)
+            else if (PlaneSettings.planeThreeIsSelected)
             {
                 Console.SetCursorPosition(y + 4, x);
                 Console.WriteLine(@"^");
