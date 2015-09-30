@@ -50,13 +50,17 @@ namespace FermiInTheAir.GameObjects
 
         private static int GetPlaneWidth()
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 return 20;
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
             {
                 return 17;
+            }
+            else if (PlaneSettings.planeThreeIsSelected)
+            {
+                return 16;
             }
             return 0;
         }
@@ -64,11 +68,15 @@ namespace FermiInTheAir.GameObjects
 
         private static int GetPlaneHeight()
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 return 5;
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
+            {
+                return 7;
+            }
+            else if (PlaneSettings.planeThreeIsSelected)
             {
                 return 7;
             }
@@ -80,7 +88,7 @@ namespace FermiInTheAir.GameObjects
         {
             int x = this.Position.X;
             int y = this.Position.Y;
-            Console.ForegroundColor = OpeningPage.planeColor;
+            Console.ForegroundColor = PlaneSettings.planeColor;
             PrintSelectedPlane(x, y);
 
 
@@ -99,7 +107,7 @@ namespace FermiInTheAir.GameObjects
 
         private void PrintSelectedPlane(int x, int y)
         {
-            if (OpeningPage.planeOneIsSelected)
+            if (PlaneSettings.planeOneIsSelected)
             {
                 Console.SetCursorPosition(y + 9, x);
                 Console.WriteLine("[]");
@@ -113,7 +121,7 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("--[]--");
                 Console.ResetColor();
             }
-            else if (OpeningPage.planeTwoIsSelected)
+            else if (PlaneSettings.planeTwoIsSelected)
             {
                 //planeHeigth = 7;
                 //planeWidth = 15;
@@ -131,6 +139,26 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("#######");
                 Console.SetCursorPosition(y + 2, x + 6);
                 Console.WriteLine("//    ||    \\");
+                Console.ResetColor();
+            }
+            else if (PlaneSettings.planeThreeIsSelected)
+            {
+                Console.SetCursorPosition(y + 4, x);
+                Console.WriteLine(@"^");
+                Console.SetCursorPosition(y + 3, x + 1);
+                Console.WriteLine(@"(*)");
+                Console.SetCursorPosition(y + 3, x + 2);
+                Console.WriteLine(@"(*)");
+                Console.SetCursorPosition(y + 2, x + 3);
+                Console.WriteLine(@"// \\");
+                Console.SetCursorPosition(y + 1, x + 4);
+                Console.WriteLine(@"/|/*\|\");
+                Console.SetCursorPosition(y, x + 5);
+                Console.WriteLine(@"/_FERMI_\");
+                Console.SetCursorPosition(y, x + 6);
+                Console.WriteLine(@"\/     \/");
+
+
             }
         }
 

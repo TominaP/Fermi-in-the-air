@@ -54,6 +54,7 @@
     <Compile Include="Utility\Music.cs" />
     <Compile Include="Utility\StatusLine.cs" />
     <Compile Include="Utility\OpeningPage.cs" />
+    <Compile Include="Utility\PlaneSettings.cs" />
     <Compile Include="Utility\Point.cs" />
     <Compile Include="Utility\PrintGameObject.cs" />
     <Compile Include="Utility\Settings.cs" />
