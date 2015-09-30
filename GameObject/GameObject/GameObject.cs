@@ -135,20 +135,51 @@ public class GameObject
 
         GameObject obj = new GameObject();
 
-
-        while (true)
-        {
-            // adding chance to spawn @ 25% 
-            Random rnd = new Random();
-            int chanceToSpawn = rnd.Next(0, 100);
+            //adding points
+            //int sumOfPoints += ;
 
 
-            if (chanceToSpawn <= 25)
+            if (sumOfPoints < 10 && chanceToSpawn <= 25)
             {
                 obj.GenerateObject();
                 //Move if generated to reduce clustering of objects 
                 obj.MoveObjects();
                 Thread.Sleep(200);
+            }
+            else if (sumOfPoints < 20 && chanceToSpawn <= 30)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects 
+                obj.MoveObjects();
+                Thread.Sleep(180);
+            }
+            else if (sumOfPoints < 30 && chanceToSpawn <= 32)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects 
+                obj.MoveObjects();
+                Thread.Sleep(150);
+            }
+            else if (sumOfPoints < 40 && chanceToSpawn <= 35)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects 
+                obj.MoveObjects();
+                Thread.Sleep(150);
+            }
+            else if (sumOfPoints < 50 && chanceToSpawn <= 38)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects 
+                obj.MoveObjects();
+                Thread.Sleep(130);
+            }
+            else if (sumOfPoints > 50 && chanceToSpawn <= 40)
+            {
+                obj.GenerateObject();
+                //Move if generated to reduce clustering of objects 
+                obj.MoveObjects();
+                Thread.Sleep(100);
             }
 
 
