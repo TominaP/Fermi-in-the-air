@@ -18,7 +18,7 @@ namespace FermiInTheAir.GameObjects
         {
             this.UpLeftCorner.X--;
 
-            if (UpLeftCorner.X <= 0 - Height)
+            if (UpLeftCorner.X <= 1 - Height)
             {
                 this.HaveCollision = true;
                 //this.UpLeftCorner.X--;

@@ -14,10 +14,11 @@ namespace FermiInTheAir
         private Queue<Projectile> projectilesFired = new Queue<Projectile>();
         private Queue<Projectile> projectilesInAir = new Queue<Projectile>();
 
-
-        private Random rnd = new Random();
+        StatusLine status = new StatusLine();
         Settings settings = new Settings();
         Player plane = new Player();
+
+        private Random rnd = new Random();
         private DestroyObject destroyObject;
         private CollectedObject collectObject;
         private GameObject current;
@@ -28,6 +29,9 @@ namespace FermiInTheAir
         {
             plane.Print();
 
+            status.ClearStatus();
+            status.PrintStatus();
+
             while (!settings.GameOver)
             {
                 // adding chance to spawn @ 25%               
@@ -36,7 +40,7 @@ namespace FermiInTheAir
 
                 if (chanceToSpawn <= 80)
                 {
-                    int objXPosition = 0;
+                    int objXPosition = 1;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
                     destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
                     gameObjectsList.Enqueue(destroyObject);
@@ -44,7 +48,7 @@ namespace FermiInTheAir
 
                 if (chanceToSpawn <= 15)
                 {
-                    int objXPosition = 0;
+                    int objXPosition = 1;
                     int objYPosition = rnd.Next(0, settings.Width - 1);
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
                     gameObjectsList.Enqueue(collectObject);
@@ -76,9 +80,9 @@ namespace FermiInTheAir
                     {
                         plane.Position.X--;
 
-                        if (plane.Position.X < 0)
+                        if (plane.Position.X < 1)
                         {
-                            plane.Position.X = 0;
+                            plane.Position.X = 1;
                         }
                     }
 
