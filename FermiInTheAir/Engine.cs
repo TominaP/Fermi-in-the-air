@@ -91,8 +91,8 @@ namespace FermiInTheAir
         private LinkedList<GameObject> gameObjectsList = new LinkedList<GameObject>();
         private LinkedList<GameObject> newGameObjectsList = new LinkedList<GameObject>();
 
-        private Queue<Projectile> projectilesFired = new Queue<Projectile>();
-        private Queue<Projectile> projectilesInAir = new Queue<Projectile>();
+        private LinkedList<Projectile> projectilesFired = new LinkedList<Projectile>();
+        private LinkedList<Projectile> projectilesInAir = new LinkedList<Projectile>();
         private HashSet<int> objectPosition = new HashSet<int>();//3200
 
         StatusLine status = new StatusLine();
@@ -201,7 +201,7 @@ namespace FermiInTheAir
                     if (keyPressed.Key == ConsoleKey.Spacebar)
                     {
                         projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
-                        projectilesFired.Enqueue(projectile);
+                        projectilesFired.AddLast(projectile);
                         PrintGameObject.PrintObject(projectile);
                     }
 
@@ -221,19 +221,20 @@ namespace FermiInTheAir
 
                 while (projectilesFired.Count > 0)
                 {
-                    Projectile current = projectilesFired.Dequeue();
+                    Projectile current = (projectilesFired.First).Value;
+                    projectilesFired.RemoveFirst();
                     PrintGameObject.ClearObject(current);
                     current.Move();
 
                     if (!current.HaveCollision)
                     {
                         PrintGameObject.PrintObject(current);
-                        projectilesInAir.Enqueue(current);
+                        projectilesInAir.AddLast(current);
                     }
                 }
 
                 projectilesFired = projectilesInAir;
-                projectilesInAir = new Queue<Projectile>();
+                projectilesInAir = new LinkedList<Projectile>();
 
 
                 //foreach (var projectile in projectilesFired)
