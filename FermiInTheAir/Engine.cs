@@ -88,11 +88,12 @@ namespace FermiInTheAir
 
     public class Engine
     {
-        private Queue<GameObject> gameObjectsList = new Queue<GameObject>();
-        private Queue<GameObject> newGameObjectsList = new Queue<GameObject>();
+        private LinkedList<GameObject> gameObjectsList = new LinkedList<GameObject>();
+        private LinkedList<GameObject> newGameObjectsList = new LinkedList<GameObject>();
 
         private Queue<Projectile> projectilesFired = new Queue<Projectile>();
         private Queue<Projectile> projectilesInAir = new Queue<Projectile>();
+        private HashSet<int> objectPosition = new HashSet<int>();//3200
 
         StatusLine status = new StatusLine();
         Settings settings = new Settings();
@@ -101,7 +102,7 @@ namespace FermiInTheAir
         private Random rnd = new Random();
         private DestroyObject destroyObject;
         private CollectedObject collectObject;
-        private GameObject current;
+        private LinkedListNode<GameObject> current;
         private Projectile projectile;
         private int sleepTime = 300;
 
@@ -123,7 +124,7 @@ namespace FermiInTheAir
                     int objXPosition = 1;
                     int objYPosition = rnd.Next(0, settings.Width - 2);
                     destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                    gameObjectsList.Enqueue(destroyObject);
+                    gameObjectsList.AddLast(destroyObject);
                 }
 
                 if (chanceToSpawn <= 15)
@@ -131,23 +132,24 @@ namespace FermiInTheAir
                     int objXPosition = 1;
                     int objYPosition = rnd.Next(0, settings.Width - 1);
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
-                    gameObjectsList.Enqueue(collectObject);
+                    gameObjectsList.AddLast(collectObject);
                 }
 
 
                 while (gameObjectsList.Count > 0)
                 {
-                    current = gameObjectsList.Dequeue();
+                    current = gameObjectsList.First;
+                    gameObjectsList.RemoveFirst();
 
-                    if (!current.HaveCollision)
+                    if (!current.Value.HaveCollision)
                     {
-                        PrintGameObject.PrintObject(current);
-                        newGameObjectsList.Enqueue(current);
+                        PrintGameObject.PrintObject(current.Value);
+                        newGameObjectsList.AddLast(current.Value);
                     }
                 }
 
                 gameObjectsList = newGameObjectsList;
-                newGameObjectsList = new Queue<GameObject>();
+                newGameObjectsList = new LinkedList<GameObject>();
 
 
                 while (Console.KeyAvailable)
@@ -252,19 +254,20 @@ namespace FermiInTheAir
 
                 while (gameObjectsList.Count > 0)
                 {
-                    current = gameObjectsList.Dequeue();
-                    PrintGameObject.ClearObject(current);
-                    current.Move();
+                    current = gameObjectsList.First;
+                    gameObjectsList.RemoveFirst();
+                    PrintGameObject.ClearObject(current.Value);
+                    current.Value.Move();
 
-                    if (!current.HaveCollision)
+                    if (!current.Value.HaveCollision)
                     {
-                        PrintGameObject.PrintObject(current);
-                        newGameObjectsList.Enqueue(current);
+                        PrintGameObject.PrintObject(current.Value);
+                        newGameObjectsList.AddLast(current);
                     }
                 }
 
                 gameObjectsList = newGameObjectsList;
-                newGameObjectsList = new Queue<GameObject>();
+                newGameObjectsList = new LinkedList<GameObject>();
 
 
                 Thread.Sleep(sleepTime);
