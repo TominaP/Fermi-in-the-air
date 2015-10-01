@@ -37,7 +37,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine(new string(' ', 35) + "      [  ]");
                 Console.WriteLine(new string(' ', 35) + "     --[]--");
                 Console.ResetColor();
-                WriteLines(6);
+                WriteLines(4);
 
                 Console.WriteLine(new string(' ', 20) + "Plane #2: <<Press <2> to select this plane.>>");
                 Console.WriteLine();
@@ -51,7 +51,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine(new string(' ', 35) + "     #######");
                 Console.WriteLine(new string(' ', 35) + "  //    ||    \\");
                 Console.ResetColor();
-                WriteLines(6);
+                WriteLines(4);
 
                 Console.WriteLine(new string(' ', 20) + "Plane #3: <<Press <3> to select this plane.>>");
                 Console.WriteLine();
@@ -66,9 +66,24 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine(new string(' ', 35) + @"     \/     \/");
                 Console.ResetColor();
 
+                Console.ForegroundColor = ConsoleColor.Gray;
+                WriteLines(2);
+                Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
+                Console.WriteLine("\t\t\t  << Press <m> to go to main menu >>");
+
                 ConsoleKeyInfo action = Console.ReadKey();
-                Console.Clear();
-                if (action.Key == ConsoleKey.NumPad1 || action.Key == ConsoleKey.D1)
+                if (action.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Engine eng = new Engine();
+                    eng.Run();
+                }
+                else if (action.Key == ConsoleKey.M)
+                {
+                    Console.Clear();
+                    OpeningPage.OpenPage();
+                }
+                else if (action.Key == ConsoleKey.NumPad1 || action.Key == ConsoleKey.D1)
                 {
                     planeTwoIsSelected = false;
                     planeOneIsSelected = true;
@@ -87,8 +102,9 @@ namespace FermiInTheAir.Utility
                     planeThreeIsSelected = true;
                 }
 
+                Console.Clear();
                 WriteLines(16);
-                Console.WriteLine("\t\t\tYou have chosen this plane #" + action.KeyChar);
+                Console.WriteLine("\t\t\tYou have chosen plane #" + action.KeyChar);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 WriteLines(3);
                 Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
@@ -116,9 +132,9 @@ namespace FermiInTheAir.Utility
         public static void SelectPlaneColor()
         {
             Console.Clear();
-            WriteLines(10);
+            WriteLines(8);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\t\t\t<< Press <r> for red plane >>");
+            Console.WriteLine("\t\t\t << Press <r> for red plane >>");
             WriteLines(5);
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -131,14 +147,33 @@ namespace FermiInTheAir.Utility
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\t\t\t<< Press <y> for yellow plane >>");
-            ConsoleKeyInfo color = Console.ReadKey();
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            WriteLines(6);
+            Console.WriteLine("\t\t     << Press <Enter> to start a new game >>");
+            Console.WriteLine();
+            Console.WriteLine("\t\t       << Press <m> to go to main menu >>");
+            ConsoleKeyInfo action = Console.ReadKey();
+            if (action.Key == ConsoleKey.Enter)
+            {
+                Console.Clear();
+                Engine eng = new Engine();
+                eng.Run();
+            }
+            else if (action.Key == ConsoleKey.M)
+            {
+                Console.Clear();
+                OpeningPage.OpenPage();
+            }
+
+            Console.ResetColor();
 
             Console.Clear();
             Console.ResetColor();
             WriteLines(16);
             Console.Write("\t\t\tYour plane is now ");
 
-            switch (color.KeyChar)
+            switch (action.KeyChar)
             {
                 case 'r':
                     Console.ForegroundColor = ConsoleColor.Red;
