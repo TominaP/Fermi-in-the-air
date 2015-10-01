@@ -1,11 +1,34 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FermiInTheAir.Utility
 {
+    public class Music
+    {
+        private static string Source = "http://www.thesoundarchive.com/starwars/imperial_march.wav";
+
+        public Music()
+        {
+            this.Play();
+        }
+
+        public void Play()
+        {
+            SoundPlayer player = new SoundPlayer(Source);
+
+            using (player)
+            {
+                player.PlayLooping();
+            }
+        }
+    }
+
+
+
     public class OpeningPage
     {
 
@@ -117,15 +140,19 @@ namespace FermiInTheAir.Utility
 
             Console.WriteLine("{0}<< Press <Enter> to start a new game >>",
                 new string(' ', (80 - "<< Press <Enter> to start a new game >>".Length - 1) / 2));
-            WriteLines(3);
+            WriteLines(2);
+
+            Console.WriteLine(new string(' ', (80 - "<< If you don't want music press <N>, and if you want press <Y>. >>".Length - 1) / 2)
+                + "<< If you don't want music press <N>, and if you want press <Y>. >>");
+            WriteLines(2);
 
             Console.WriteLine(new string(' ', (80 - "<< Press <p> to change plane >>".Length - 1) / 2)
                 + "<< Press <p> to change plane >>");
-            WriteLines(3);
+            WriteLines(2);
 
             Console.WriteLine(new string(' ', (80 - "<< Press <c> to change plane's color >>".Length - 1) / 2)
                 + "<< Press <c> to change plane's color >>");
-            WriteLines(3);
+            WriteLines(2);
 
             Console.WriteLine("{0}A game by Fermi ©2015{0}", new string(' ', (80 - "A game by Fermi ©2015".Length - 1) / 2));
 
@@ -148,11 +175,15 @@ namespace FermiInTheAir.Utility
                 {
                     PlaneSettings.SelectPlane();
                 }
+                else if (action.Key == ConsoleKey.Y)
+                {
+                    Music music = new Music();
+                }
             }
 
         }
 
-        
+
 
         private static void WriteLines(int lines)
         {
@@ -161,7 +192,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine();
             }
         }
-        
+
 
 
         static void Header()
