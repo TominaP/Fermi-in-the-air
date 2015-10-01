@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FermiInTheAir.Utility;
 
 namespace FermiInTheAir.GameObjects
@@ -17,9 +13,9 @@ namespace FermiInTheAir.GameObjects
 
         private static int planeHeigth = GetPlaneHeight();
 
-        private static int playerStartPositionX = WindowWidth / 2 - planeWidth / 2;
+        private static int playerStartPositionY = WindowWidth / 2 - planeWidth / 2;
 
-        private static int playerStartPositionY = WindowHeigth - planeHeigth;
+        private static int playerStartPositionX = WindowHeigth - planeHeigth;
 
         private static int StartLives = 3;
 
@@ -52,7 +48,7 @@ namespace FermiInTheAir.GameObjects
         {
             if (PlaneSettings.planeOneIsSelected)
             {
-                return 20;
+                return 18;
             }
             else if (PlaneSettings.planeTwoIsSelected)
             {
@@ -60,7 +56,7 @@ namespace FermiInTheAir.GameObjects
             }
             else if (PlaneSettings.planeThreeIsSelected)
             {
-                return 16;
+                return 9;
             }
             return 0;
         }
@@ -90,34 +86,21 @@ namespace FermiInTheAir.GameObjects
             int y = this.Position.Y;
             Console.ForegroundColor = PlaneSettings.planeColor;
             PrintSelectedPlane(x, y);
-
-
-
-            //
-            // for (int i = x; i < x + planeHeigth; i++)
-            // {
-            //     for (int j = y; j < y + planeWidth; j++)
-            //     {
-            //         Console.SetCursorPosition(j, i);
-            //         Console.ForegroundColor = ConsoleColor.Blue;
-            //         Console.Write('x');
-            //     }
-            // }
         }
 
         private void PrintSelectedPlane(int x, int y)
         {
             if (PlaneSettings.planeOneIsSelected)
             {
-                Console.SetCursorPosition(y + 9, x);
+                Console.SetCursorPosition(y + 8, x);
                 Console.WriteLine("[]");
-                Console.SetCursorPosition(y + 2, x + 1);
+                Console.SetCursorPosition(y + 1, x + 1);
                 Console.WriteLine("______[  ]______");
-                Console.SetCursorPosition(y + 1, x + 2);
+                Console.SetCursorPosition(y, x + 2);
                 Console.WriteLine(@"/_____[FERMI]____\");
-                Console.SetCursorPosition(y + 8, x + 3);
+                Console.SetCursorPosition(y + 7, x + 3);
                 Console.WriteLine("[  ]");
-                Console.SetCursorPosition(y + 7, x + 4);
+                Console.SetCursorPosition(y + 6, x + 4);
                 Console.WriteLine("--[]--");
                 Console.ResetColor();
             }
@@ -137,8 +120,8 @@ namespace FermiInTheAir.GameObjects
                 Console.WriteLine("*****************");
                 Console.SetCursorPosition(y + 5, x + 5);
                 Console.WriteLine("#######");
-                Console.SetCursorPosition(y + 2, x + 6);
-                Console.WriteLine("//    ||    \\");
+                Console.SetCursorPosition(y + 1, x + 6);
+                Console.WriteLine(@"//    ||    \\");
                 Console.ResetColor();
             }
             else if (PlaneSettings.planeThreeIsSelected)
@@ -158,7 +141,6 @@ namespace FermiInTheAir.GameObjects
                 Console.SetCursorPosition(y, x + 6);
                 Console.WriteLine(@"\/     \/");
 
-
             }
         }
 
@@ -167,16 +149,59 @@ namespace FermiInTheAir.GameObjects
             int x = this.Position.X;
             int y = this.Position.Y;
 
-            for (int i = x; i < x + planeHeigth; i++)
+            if (PlaneSettings.planeOneIsSelected)
             {
-                for (int j = y; j < y + planeWidth; j++)
-                {
-                    Console.SetCursorPosition(j, i);
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(' ');
-                }
+                Console.SetCursorPosition(y + 8, x);
+                Console.WriteLine("{0}", new string(' ', 2));
+                Console.SetCursorPosition(y + 1, x + 1);
+                Console.WriteLine("{0}", new string(' ', 18));
+                Console.SetCursorPosition(y, x + 2);
+                Console.WriteLine("{0}", new string(' ', 18));
+                Console.SetCursorPosition(y + 7, x + 3);
+                Console.WriteLine("{0}", new string(' ', 4));
+                Console.SetCursorPosition(y + 6, x + 4);
+                Console.WriteLine("{0}", new string(' ', 6));
+                Console.ResetColor();
             }
-        }
+            else if (PlaneSettings.planeTwoIsSelected)
+            {
+                //planeHeigth = 7;
+                //planeWidth = 15;
+                Console.SetCursorPosition(y + 8, x);
+                Console.WriteLine("{0}", new string(' ', 1));
+                Console.SetCursorPosition(y + 7, x + 1);
+                Console.WriteLine("{0}", new string(' ', 3));
+                Console.SetCursorPosition(y + 5, x + 2);
+                Console.WriteLine("{0}", new string(' ', 7));
+                Console.SetCursorPosition(y, x + 3);
+                Console.WriteLine("{0}", new string(' ', 17));
+                Console.SetCursorPosition(y, x + 4);
+                Console.WriteLine("{0}", new string(' ', 17));
+                Console.SetCursorPosition(y + 5, x + 5);
+                Console.WriteLine("{0}", new string(' ', 7));
+                Console.SetCursorPosition(y + 1, x + 6);
+                Console.WriteLine("{0}", new string(' ', 14));
+                Console.ResetColor();
+            }
+            else if (PlaneSettings.planeThreeIsSelected)
+            {
+                Console.SetCursorPosition(y + 4, x);
+                Console.WriteLine("{0}", new string(' ', 1));
+                Console.SetCursorPosition(y + 3, x + 1);
+                Console.WriteLine("{0}", new string(' ', 3));
+                Console.SetCursorPosition(y + 3, x + 2);
+                Console.WriteLine("{0}", new string(' ', 3));
+                Console.SetCursorPosition(y + 2, x + 3);
+                Console.WriteLine("{0}", new string(' ', 5));
+                Console.SetCursorPosition(y + 1, x + 4);
+                Console.WriteLine("{0}", new string(' ', 7));
+                Console.SetCursorPosition(y, x + 5);
+                Console.WriteLine("{0}", new string(' ', 9));
+                Console.SetCursorPosition(y, x + 6);
+                Console.WriteLine("{0}", new string(' ', 9));
 
+            }
+
+        }
     }
 }

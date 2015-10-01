@@ -13,6 +13,7 @@ namespace FermiInTheAir.Utility
         public static bool planeOneIsSelected = true; //by default
         public static bool planeTwoIsSelected = false;
         public static bool planeThreeIsSelected = false;
+
         private static void WriteLines(int lines)
         {
             for (int i = 0; i < lines; i++)
@@ -20,6 +21,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine();
             }
         }
+
         public static void SelectPlane()
         {
             Console.Clear();
@@ -93,6 +95,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine();
                 Console.WriteLine("\t\t\t<< Press <m> to go to main menu >>");
                 action = Console.ReadKey();
+
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
