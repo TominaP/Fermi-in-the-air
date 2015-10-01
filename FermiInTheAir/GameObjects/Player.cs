@@ -15,7 +15,7 @@ namespace FermiInTheAir.GameObjects
 
         private static int playerStartPositionY = WindowWidth / 2 - planeWidth / 2;
 
-        private static int playerStartPositionX = WindowHeigth - planeHeigth;
+        private static int playerStartPositionX = WindowHeigth - planeHeigth -1;
 
         private static int StartLives = 3;
 

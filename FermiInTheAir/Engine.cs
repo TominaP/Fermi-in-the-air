@@ -130,7 +130,7 @@ namespace FermiInTheAir
                 if (chanceToSpawn <= 15)
                 {
                     int objXPosition = 1;
-                    int objYPosition = rnd.Next(0, settings.Width - 1);
+                    int objYPosition = rnd.Next(0, settings.Width);
                     collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
                     gameObjectsList.AddLast(collectObject);
                 }
@@ -155,8 +155,8 @@ namespace FermiInTheAir
                 while (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo keyPressed = Console.ReadKey();
-
-                    plane.Clear();
+                     plane.Clear();
+                   
 
                     if (keyPressed.Key == ConsoleKey.UpArrow)
                     {
@@ -213,9 +213,7 @@ namespace FermiInTheAir
                         Console.ReadKey();
                     }
 
-
                     plane.Print();
-
                 }
 
 

@@ -106,8 +106,7 @@ namespace FermiInTheAir.Utility
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             string msg = "Press <ENTER> ... if you dare !!!";
             Console.WriteLine("\n \n {0, 50}", msg);
-            Console.ReadKey();
-
+            
             while (true)
             {
                 ConsoleKeyInfo action = Console.ReadKey();
@@ -116,9 +115,7 @@ namespace FermiInTheAir.Utility
                     Console.Clear();
                     OpeningPage.OpenPage();
                 }
-
             }
-
         }
 
 
@@ -180,10 +177,7 @@ namespace FermiInTheAir.Utility
                     Music music = new Music();
                 }
             }
-
         }
-
-
 
         private static void WriteLines(int lines)
         {
@@ -192,8 +186,6 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine();
             }
         }
-
-
 
         static void Header()
         {
@@ -206,6 +198,7 @@ namespace FermiInTheAir.Utility
             }
             Console.ResetColor();
         }
+
         static void Footer()
         {
             Console.ForegroundColor = ConsoleColor.Red;
