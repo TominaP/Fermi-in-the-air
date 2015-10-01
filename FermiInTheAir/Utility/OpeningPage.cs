@@ -91,7 +91,7 @@ namespace FermiInTheAir.Utility
                 @"   |__| |__| \__|        |__|     |__|  |__| |_______|   /__/     \__\ |__| | _| `._____| ",
             };
 
-            Console.WindowWidth = 140;
+            Console.WindowWidth = 93; //previous WindowWidth = 140
             Console.WriteLine("\n");
             foreach (string line in nameGame1)
                 Console.WriteLine(line);
@@ -106,7 +106,12 @@ namespace FermiInTheAir.Utility
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             string msg = "Press <ENTER> ... if you dare !!!";
             Console.WriteLine("\n \n {0, 50}", msg);
+<<<<<<< HEAD
             
+=======
+            //Console.ReadKey();
+
+>>>>>>> origin/master
             while (true)
             {
                 ConsoleKeyInfo action = Console.ReadKey();
