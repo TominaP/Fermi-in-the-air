@@ -106,12 +106,7 @@ namespace FermiInTheAir.Utility
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             string msg = "Press <ENTER> ... if you dare !!!";
             Console.WriteLine("\n \n {0, 50}", msg);
-<<<<<<< HEAD
-            
-=======
-            //Console.ReadKey();
 
->>>>>>> origin/master
             while (true)
             {
                 ConsoleKeyInfo action = Console.ReadKey();
