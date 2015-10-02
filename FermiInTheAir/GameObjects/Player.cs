@@ -74,7 +74,7 @@ namespace FermiInTheAir.GameObjects
             }
             else if (PlaneSettings.planeThreeIsSelected)
             {
-                return 7;
+                return 8;
             }
             return 0;
         }
@@ -106,8 +106,6 @@ namespace FermiInTheAir.GameObjects
             }
             else if (PlaneSettings.planeTwoIsSelected)
             {
-                //planeHeigth = 7;
-                //planeWidth = 15;
                 Console.SetCursorPosition(y + 8, x);
                 Console.Write("|");
                 Console.SetCursorPosition(y + 7, x + 1);
@@ -133,7 +131,7 @@ namespace FermiInTheAir.GameObjects
                 Console.SetCursorPosition(y + 3, x + 2);
                 Console.Write(@"(*)");
                 Console.SetCursorPosition(y + 2, x + 3);
-                Console.Write(@"// \\");
+                Console.Write(@"// \\");               
                 Console.SetCursorPosition(y + 1, x + 4);
                 Console.Write(@"/|/*\|\");
                 Console.SetCursorPosition(y, x + 5);
@@ -165,8 +163,6 @@ namespace FermiInTheAir.GameObjects
             }
             else if (PlaneSettings.planeTwoIsSelected)
             {
-                //planeHeigth = 7;
-                //planeWidth = 15;
                 Console.SetCursorPosition(y + 8, x);
                 Console.Write("{0}", new string(' ', 1));
                 Console.SetCursorPosition(y + 7, x + 1);
