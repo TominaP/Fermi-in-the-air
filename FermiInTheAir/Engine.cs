@@ -110,14 +110,14 @@ namespace FermiInTheAir
         {
             plane.Print();
 
-            status.ClearStatus();
-            status.PrintStatus();
 
             while (!settings.GameOver)
             {
                 // adding chance to spawn @ 25%               
                 int chanceToSpawn = rnd.Next(0, 100);
 
+                status.ClearStatus();
+                status.PrintStatus();
 
                 if (chanceToSpawn <= 80)
                 {
@@ -172,9 +172,9 @@ namespace FermiInTheAir
                     {
                         plane.Position.X++;
 
-                        if (plane.Position.X >= settings.Height - plane.PlaneHeight)
+                        if (plane.Position.X > settings.Height - plane.PlaneHeight)
                         {
-                            plane.Position.X = settings.Height - plane.PlaneHeight - 1;
+                            plane.Position.X = settings.Height - plane.PlaneHeight;
                         }
                     }
 
@@ -192,9 +192,9 @@ namespace FermiInTheAir
                     {
                         plane.Position.Y++;
 
-                        if (plane.Position.Y >= settings.Width - plane.PlaneWidth)
+                        if (plane.Position.Y > settings.Width - plane.PlaneWidth)
                         {
-                            plane.Position.Y = settings.Width - plane.PlaneWidth - 1;
+                            plane.Position.Y = settings.Width - plane.PlaneWidth;
                         }
                     }
 
@@ -268,7 +268,7 @@ namespace FermiInTheAir
                 gameObjectsList = newGameObjectsList;
                 newGameObjectsList = new LinkedList<GameObject>();
 
-
+                status.Score += 1;
                 Thread.Sleep(sleepTime);
             }
 
