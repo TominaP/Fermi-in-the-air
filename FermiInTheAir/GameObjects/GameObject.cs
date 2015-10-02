@@ -31,6 +31,13 @@
                 this.HaveCollision = true;
                 this.UpLeftCorner.X--;
             }
-        }  
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = int.Parse(this.UpLeftCorner.X.ToString() + this.UpLeftCorner.Y);
+            return hashCode; //x y coordinates concatenated
+        }
+
     }
 }
