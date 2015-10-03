@@ -3,16 +3,18 @@ using FermiInTheAir.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 
 public class Engine
 {
-    private LinkedList<GameObject> gameObjectsList = new LinkedList<GameObject>();
-    private LinkedList<GameObject> newGameObjectsList = new LinkedList<GameObject>();
+    private List<GameObject> gameObjectsList = new List<GameObject>();
+    private List<GameObject> newGameObjectsList = new List<GameObject>();
 
-    private LinkedList<Projectile> projectilesFired = new LinkedList<Projectile>();
-    private LinkedList<Projectile> projectilesInAir = new LinkedList<Projectile>();
-    private HashSet<int> objectPosition = new HashSet<int>();//3200
+    private List<Projectile> projectilesFired = new List<Projectile>();
+    private List<Projectile> projectilesInAir = new List<Projectile>();
+    private Dictionary<int, int> objectPosition = new Dictionary<int, int>();//coordinates and index of gameobjects
+    private Dictionary<int, int> newObjectPosition = new Dictionary<int, int>();//coordinates and index of gameobjects
 
     StatusLine status = new StatusLine();
     Settings settings = new Settings();
@@ -21,8 +23,9 @@ public class Engine
     private Random rnd = new Random();
     private DestroyObject destroyObject;
     private CollectedObject collectObject;
-    private LinkedListNode<GameObject> current;
+    private GameObject current;
     private Projectile projectile;
+    private int projectileCode;
     private int sleepTime = 300;
 
     public void Run()
@@ -43,7 +46,7 @@ public class Engine
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width - 2);
                 destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                gameObjectsList.AddLast(destroyObject);
+                gameObjectsList.Add(destroyObject);
             }
 
             if (chanceToSpawn <= 15)
@@ -51,25 +54,28 @@ public class Engine
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width);
                 collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
-                gameObjectsList.AddLast(collectObject);
+                gameObjectsList.Add(collectObject);
             }
 
-
+            gameObjectsList.RemoveAll(go => go.HaveCollision == true);
             while (gameObjectsList.Count > 0)
             {
-                current = gameObjectsList.First;
-                gameObjectsList.RemoveFirst();
+                current = gameObjectsList.First();
+                gameObjectsList.RemoveAt(0);
 
-                if (!current.Value.HaveCollision)
+                if (!current.HaveCollision)
                 {
-                    PrintGameObject.PrintObject(current.Value);
-                    newGameObjectsList.AddLast(current.Value);
+                    PrintGameObject.PrintObject(current);
+                    newGameObjectsList.Add(current);
+                    newObjectPosition.Add(current.GetHashCode(), newGameObjectsList.IndexOf(current));//add gameObject to hash by its position
                 }
             }
 
             gameObjectsList = newGameObjectsList;
-            newGameObjectsList = new LinkedList<GameObject>();
+            newGameObjectsList = new List<GameObject>();
 
+            objectPosition = newObjectPosition;
+            newObjectPosition = new Dictionary<int, int>();
 
             while (Console.KeyAvailable)
             {
@@ -120,7 +126,18 @@ public class Engine
                 if (keyPressed.Key == ConsoleKey.Spacebar)
                 {
                     projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
-                    projectilesFired.AddLast(projectile);
+                    projectileCode = projectile.GetHashCode();
+
+                    if (objectPosition.ContainsKey(projectileCode))//have collision
+                    {
+                        projectile.HaveCollision = true;
+                        gameObjectsList.ElementAt(objectPosition.ElementAt(projectileCode).Value).HaveCollision = true;
+                        objectPosition.Remove(projectile.GetHashCode());
+                    }
+                    else
+                    {
+                        projectilesFired.Add(projectile);
+                    }
                     PrintGameObject.PrintObject(projectile);
                 }
 
@@ -136,23 +153,61 @@ public class Engine
                 plane.Print();
             }
 
-
+            //Check projectilesFired
+            projectilesFired.RemoveAll(pr => pr.HaveCollision == true);
             while (projectilesFired.Count > 0)
             {
-                Projectile current = (projectilesFired.First).Value;
-                projectilesFired.RemoveFirst();
-                PrintGameObject.ClearObject(current);
-                current.Move();
+                Projectile projectile = projectilesFired.First();
+                projectilesFired.RemoveAt(0);
+                PrintGameObject.ClearObject(projectile);
+                projectile.Move();
+                projectileCode = projectile.GetHashCode();
 
-                if (!current.HaveCollision)
+                if (objectPosition.ContainsKey(projectileCode))//have collision
                 {
-                    PrintGameObject.PrintObject(current);
-                    projectilesInAir.AddLast(current);
+                    projectile.HaveCollision = true;
+                    gameObjectsList.ElementAt(objectPosition[projectileCode]).HaveCollision = true;
+                    objectPosition.Remove(projectile.GetHashCode());
+                }
+                else
+                {
+                    PrintGameObject.PrintObject(projectile);
+                    projectilesInAir.Add(projectile);
                 }
             }
 
             projectilesFired = projectilesInAir;
-            projectilesInAir = new LinkedList<Projectile>();
+            projectilesInAir = new List<Projectile>();
+
+   
+            while (gameObjectsList.Count > 0)
+            {
+
+                current = gameObjectsList.First();
+                gameObjectsList.RemoveAt(0);
+                PrintGameObject.ClearObject(current);
+                current.Move();
+                if (projectilesFired.Exists(p => p.GetHashCode() == current.GetHashCode()))//collision
+                {
+                    current.HaveCollision = true;
+                    PrintGameObject.PrintObject(current);
+                }
+                else
+                {
+                    PrintGameObject.PrintObject(current);
+                    newGameObjectsList.Add(current);
+                    newObjectPosition.Add(current.GetHashCode(), newGameObjectsList.IndexOf(current));//add gameObject to hash by its position
+                }
+            }
+
+            gameObjectsList = newGameObjectsList;
+            newGameObjectsList = new List<GameObject>();
+
+            objectPosition = newObjectPosition;
+            newObjectPosition = new Dictionary<int, int>();
+
+            status.Score += 1;
+            Thread.Sleep(sleepTime);
 
 
             //foreach (var projectile in projectilesFired)
@@ -168,28 +223,6 @@ public class Engine
             //    }
             //}
 
-
-
-
-            while (gameObjectsList.Count > 0)
-            {
-                current = gameObjectsList.First;
-                gameObjectsList.RemoveFirst();
-                PrintGameObject.ClearObject(current.Value);
-                current.Value.Move();
-
-                if (!current.Value.HaveCollision)
-                {
-                    PrintGameObject.PrintObject(current.Value);
-                    newGameObjectsList.AddLast(current);
-                }
-            }
-
-            gameObjectsList = newGameObjectsList;
-            newGameObjectsList = new LinkedList<GameObject>();
-
-            status.Score += 1;
-            Thread.Sleep(sleepTime);
         }
 
         Settings.PrintGameOver();

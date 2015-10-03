@@ -35,9 +35,11 @@
 
         public override int GetHashCode()
         {
-            int hashCode = int.Parse(this.UpLeftCorner.X.ToString() + this.UpLeftCorner.Y);
+            int hashCode = 80* this.UpLeftCorner.X + this.UpLeftCorner.Y;
             return hashCode; //x y coordinates concatenated
         }
+
+        
 
     }
 }

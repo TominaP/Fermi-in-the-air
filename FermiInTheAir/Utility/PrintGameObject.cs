@@ -10,13 +10,14 @@ namespace FermiInTheAir.Utility
             int x = obj.UpLeftCorner.X;
             int y = obj.UpLeftCorner.Y;
 
-            if (obj.HaveCollision)
-            {
-                Console.SetCursorPosition(x, y);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("<x>");
-            }
-            else
+            //if (obj.HaveCollision)
+            //{
+            //    Console.SetCursorPosition(x, y);
+            //    Console.ForegroundColor = ConsoleColor.Red;
+            //    Console.Write("<x>");
+            //}
+            //else
+            if(!obj.HaveCollision)
             {
                 for (int i = x; i < x + obj.Height; i++)
                 {
