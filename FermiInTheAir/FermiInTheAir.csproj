@@ -52,6 +52,7 @@
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Leaderboard.cs" />
     <Compile Include="Utility\Music.cs" />
     <Compile Include="Utility\PauseScreenPage.cs" />
     <Compile Include="Utility\StatusLine.cs" />

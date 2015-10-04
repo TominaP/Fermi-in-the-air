@@ -151,8 +151,12 @@ namespace FermiInTheAir.Utility
                 + "<< Press <c> to change plane's color >>");
             WriteLines(2);
 
-            Console.WriteLine("{0}A game by Fermi ©2015{0}", new string(' ', (80 - "A game by Fermi ©2015".Length - 1) / 2));
+            Console.WriteLine(new string(' ', (80 - "<< Press <L> to see Fermi in the air's Leaderboard >>".Length - 1) / 2)
+                + "<< Press <L> to see Fermi in the air's Leaderboard >>");
+            WriteLines(2);
 
+            Console.WriteLine("{0}A game by Fermi ©2015{0}", new string(' ', (80 - "A game by Fermi ©2015".Length - 1) / 2));
+            Console.WriteLine();
             Footer();
 
             while (true)
@@ -176,6 +180,10 @@ namespace FermiInTheAir.Utility
                 {
                     Music music = new Music();
                 }
+                else if (action.Key == ConsoleKey.L)
+                {
+                    Leaderboard.ViewScores();
+                }
             }
         }
 
@@ -192,7 +200,7 @@ namespace FermiInTheAir.Utility
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(new string('*', 80));
             Console.WriteLine(new string('*', 80));
-            for (int i = 3; i >= 0; i--)
+            for (int i = 2; i >= 0; i--)
             {
                 Console.WriteLine("{0}{1}{0}", new string('*', i), new string(' ', 80 - 2 * i));
             }
@@ -202,7 +210,7 @@ namespace FermiInTheAir.Utility
         static void Footer()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 2; i++)
             {
                 Console.WriteLine("{0}{1}{0}", new string('*', i), new string(' ', 80 - 2 * i));
             }
