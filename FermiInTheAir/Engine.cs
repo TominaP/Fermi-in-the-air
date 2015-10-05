@@ -36,7 +36,7 @@ public class Engine
             status.ClearStatus();
             status.PrintStatus();
 
-            if (chanceToSpawn <= 80)
+            if (chanceToSpawn <= 40)
             {
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width - 2);
