@@ -29,7 +29,10 @@ namespace FermiInTheAir.GameObjects
             this.Lives = StartLives;
             this.isAlive = false;
             this.isHitted = false;
+            SetPlaneCoordinates();
         }
+
+       
 
         public int PlaneHeight { get; private set; }
 
@@ -42,6 +45,8 @@ namespace FermiInTheAir.GameObjects
         public bool isAlive { get; set; }
 
         public bool isHitted { get; set; }
+
+        public Point[] PositionCoordinate { get; set; }
 
 
         private static int GetPlaneWidth()
@@ -77,6 +82,40 @@ namespace FermiInTheAir.GameObjects
                 return 8;
             }
             return 0;
+        }
+
+        public void SetPlaneCoordinates()
+        {
+            Point[] positions = new Point[48];
+
+            if (PlaneSettings.planeOneIsSelected)
+            {
+                int index = 0;
+                positions[index++] = new Point(this.Position.X, this.Position.Y + 8);
+                positions[index++] = new Point(this.Position.X, this.Position.Y + 9);
+
+                for (int i = this.Position.Y + 1; i < this.Position.Y + 19; i++)
+                {
+                    positions[index++] = new Point(this.Position.X + 1, i);
+                }
+
+                for (int i = this.Position.Y; i < this.Position.Y + 18; i++)
+                {
+                    positions[index++] = new Point(this.Position.X + 2, i);
+                }
+
+                for (int i = this.Position.Y + 7; i < this.Position.Y + 11; i++)
+                {
+                    positions[index++] = new Point(this.Position.X + 3, i);
+                }
+
+                for (int i = this.Position.Y + 6; i < this.Position.Y + 12; i++)
+                {
+                    positions[index++] = new Point(this.Position.X + 4, i);
+                }
+            }
+
+            this.PositionCoordinate = positions;
         }
 
 

@@ -11,11 +11,6 @@ public class Engine
     private List<GameObject> gameObjectsList = new List<GameObject>();
     private List<GameObject> newGameObjectsList = new List<GameObject>();
 
-    private List<Projectile> projectilesFired = new List<Projectile>();
-    private List<Projectile> projectilesInAir = new List<Projectile>();
-    private Dictionary<int, int> objectPosition = new Dictionary<int, int>();//coordinates and index of gameobjects
-    private Dictionary<int, int> newObjectPosition = new Dictionary<int, int>();//coordinates and index of gameobjects
-
     StatusLine status = new StatusLine();
     Settings settings = new Settings();
     Player plane = new Player();
@@ -24,14 +19,14 @@ public class Engine
     private DestroyObject destroyObject;
     private CollectedObject collectObject;
     private GameObject current;
-    private Projectile projectile;
-    private int projectileCode;
+    private Projectile projectile;   
     private int sleepTime = 300;
 
     public void Run()
     {
         plane.Print();
 
+        //set plane point coordinates to true       
 
         while (!settings.GameOver)
         {
@@ -41,12 +36,31 @@ public class Engine
             status.ClearStatus();
             status.PrintStatus();
 
-            if (chanceToSpawn <= 80)
+            if (chanceToSpawn <= 40)
             {
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width - 2);
                 destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
-                gameObjectsList.Add(destroyObject);
+
+                foreach (var point in destroyObject.PositionsCoordinates)
+                {
+                    if (CheckCollisionWhitPlane(destroyObject, plane))
+                    {
+                        destroyObject.HaveCollision = true;
+                        plane.Lives--;
+                        break;
+                    }
+                    if (CheckCollisionWhitOtherObject(point))
+                    {
+                        destroyObject.HaveCollision = true;
+                    }
+                }
+
+                if (!destroyObject.HaveCollision)
+                {
+                    gameObjectsList.Add(destroyObject);
+                    destroyObject.SetPositionsCoordinates();
+                }
             }
 
             if (chanceToSpawn <= 15)
@@ -54,34 +68,50 @@ public class Engine
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width);
                 collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
-                gameObjectsList.Add(collectObject);
+
+                if (CheckCollisionWhitPlane(collectObject, plane))
+                {
+                    collectObject.HaveCollision = true;
+                    settings.Score += 5; //TODO : regulate score
+                }
+
+                if (CheckCollisionWhitOtherObject(collectObject.UpLeftCorner))
+                {
+                    destroyObject.HaveCollision = true;
+                }
+
+                if (!destroyObject.HaveCollision)
+                {
+                    gameObjectsList.Add(collectObject);
+                    collectObject.SetPositionsCoordinates();
+                }
             }
 
-            gameObjectsList.RemoveAll(go => go.HaveCollision == true);
             while (gameObjectsList.Count > 0)
             {
-                current = gameObjectsList.First();
-                gameObjectsList.RemoveAt(0);
+                current = gameObjectsList[gameObjectsList.Count - 1];
+                gameObjectsList.RemoveAt(gameObjectsList.Count - 1);
 
                 if (!current.HaveCollision)
                 {
                     PrintGameObject.PrintObject(current);
                     newGameObjectsList.Add(current);
-                    newObjectPosition.Add(current.GetHashCode(), newGameObjectsList.IndexOf(current));//add gameObject to hash by its position
                 }
+            }
+
+            if (plane.Lives < 0)
+            {
+                settings.GameOver = true;
+                break;
             }
 
             gameObjectsList = newGameObjectsList;
             newGameObjectsList = new List<GameObject>();
 
-            objectPosition = newObjectPosition;
-            newObjectPosition = new Dictionary<int, int>();
-
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo keyPressed = Console.ReadKey();
                 plane.Clear();
-
 
                 if (keyPressed.Key == ConsoleKey.UpArrow)
                 {
@@ -126,18 +156,16 @@ public class Engine
                 if (keyPressed.Key == ConsoleKey.Spacebar)
                 {
                     projectile = new Projectile(new Point(plane.Position.X - 1, plane.Position.Y + plane.PlaneWidth / 2));
-                    projectileCode = projectile.GetHashCode();
 
-                    if (objectPosition.ContainsKey(projectileCode))//have collision
+                    if (CheckCollisionWhitOtherObject(projectile.UpLeftCorner))
                     {
                         projectile.HaveCollision = true;
-                        gameObjectsList.ElementAt(objectPosition.ElementAt(projectileCode).Value).HaveCollision = true;
-                        objectPosition.Remove(projectile.GetHashCode());
                     }
                     else
                     {
-                        projectilesFired.Add(projectile);
+                        gameObjectsList.Add(projectile);
                     }
+                    
                     PrintGameObject.PrintObject(projectile);
                 }
 
@@ -150,82 +178,146 @@ public class Engine
                     Console.Clear();
                 }
 
+
+                plane.SetPlaneCoordinates();
+                bool haveCollision = CheckPlaneCollision();
+
+                if (haveCollision)
+                {
+                    plane.Lives--;
+                }
+
+                if (plane.Lives < 0)
+                {
+                    settings.GameOver = true;
+                    break;
+                }
+
                 plane.Print();
             }
-
-            //Check projectilesFired
-            projectilesFired.RemoveAll(pr => pr.HaveCollision == true);
-            while (projectilesFired.Count > 0)
-            {
-                Projectile projectile = projectilesFired.First();
-                projectilesFired.RemoveAt(0);
-                PrintGameObject.ClearObject(projectile);
-                projectile.Move();
-                projectileCode = projectile.GetHashCode();
-
-                if (objectPosition.ContainsKey(projectileCode))//have collision
-                {
-                    projectile.HaveCollision = true;
-                    gameObjectsList.ElementAt(objectPosition[projectileCode]).HaveCollision = true;
-                    objectPosition.Remove(projectile.GetHashCode());
-                }
-                else
-                {
-                    PrintGameObject.PrintObject(projectile);
-                    projectilesInAir.Add(projectile);
-                }
-            }
-
-            projectilesFired = projectilesInAir;
-            projectilesInAir = new List<Projectile>();
-
-   
+            
             while (gameObjectsList.Count > 0)
             {
+                current = gameObjectsList[gameObjectsList.Count - 1];
+                gameObjectsList.RemoveAt(gameObjectsList.Count - 1);
 
-                current = gameObjectsList.First();
-                gameObjectsList.RemoveAt(0);
                 PrintGameObject.ClearObject(current);
+
                 current.Move();
-                if (projectilesFired.Exists(p => p.GetHashCode() == current.GetHashCode()))//collision
+                current.SetPositionsCoordinates();
+
+                if (CheckCollisionWhitPlane(current, plane))
                 {
                     current.HaveCollision = true;
-                    PrintGameObject.PrintObject(current);
+                    plane.Lives--;
+                }
+                else if (CheckCollisionWhitOtherObject(current.UpLeftCorner))
+                {
+                    current.HaveCollision = true;
                 }
                 else
                 {
                     PrintGameObject.PrintObject(current);
                     newGameObjectsList.Add(current);
-                    newObjectPosition.Add(current.GetHashCode(), newGameObjectsList.IndexOf(current));//add gameObject to hash by its position
                 }
             }
 
             gameObjectsList = newGameObjectsList;
             newGameObjectsList = new List<GameObject>();
 
-            objectPosition = newObjectPosition;
-            newObjectPosition = new Dictionary<int, int>();
-
             status.Score += 1;
             Thread.Sleep(sleepTime);
-
-
-            //foreach (var projectile in projectilesFired)
-            //{
-            //    if (projectile.UpLeftCorner.X >= 0)
-            //    {
-            //        PrintGameObject.ClearObject(projectile);
-            //        projectile.Move();
-            //        if (projectile.UpLeftCorner.X > 0)
-            //        {
-            //            PrintGameObject.PrintObject(projectile);
-            //        }
-            //    }
-            //}
-
         }
 
         Settings.PrintGameOver();
+    }
+
+    private bool CheckCollisionWhitOtherObject(Point point)
+    {
+        bool haveCollision = false;
+
+        foreach (var obj in gameObjectsList)
+        {
+            foreach (var o in obj.PositionsCoordinates)
+            {
+                if (point.GetHashCode() == o.GetHashCode())
+                {
+                    obj.HaveCollision = true;
+                    return true;
+                }
+            }
+        }
+
+        return haveCollision;
+    }
+
+    private bool CheckPlaneCollision()
+    {
+        bool haveCollision = false;
+
+        foreach (var point in plane.PositionCoordinate)
+        {
+            foreach (var obj in gameObjectsList)
+            {
+                foreach (var o in obj.PositionsCoordinates)
+                {
+                    if (point.GetHashCode() == o.GetHashCode())
+                    {
+                        if (obj is CollectedObject)
+                        {
+                            settings.Score += 5;
+                        }
+                        else if (obj is DestroyObject)
+                        {
+                            haveCollision = true;
+                            obj.HaveCollision = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return haveCollision;
+    }
+
+    private bool CheckCollisionWhitCollectedObject(Point currentPoint)
+    {
+        bool isCollectedObject = false;
+
+        foreach (var obj in gameObjectsList)
+        {
+            foreach (var point in obj.PositionsCoordinates)
+            {
+                if (point.GetHashCode() == currentPoint.GetHashCode())
+                {
+                    if (obj is CollectedObject)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return isCollectedObject;
+    }
+
+
+    private bool CheckCollisionWhitPlane(GameObject current, Player plane)
+    {
+        bool haveCollision = false;
+
+        foreach (var objectPosition in current.PositionsCoordinates)
+        {
+            foreach (var planePosition in plane.PositionCoordinate)
+            {
+                if (objectPosition.GetHashCode() == planePosition.GetHashCode())
+                {
+                    return true;
+                }
+            }
+        }
+
+        return haveCollision;
     }
 }
 

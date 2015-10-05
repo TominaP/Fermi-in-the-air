@@ -14,11 +14,11 @@ namespace FermiInTheAir.GameObjects
 
         }
 
-        public void Move()
+        public override void Move()
         {
             this.UpLeftCorner.X--;
 
-            if (UpLeftCorner.X <= 1 - Height)
+            if (UpLeftCorner.X == 1)
             {
                 this.HaveCollision = true;
             }

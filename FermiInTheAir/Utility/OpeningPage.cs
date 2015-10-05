@@ -114,6 +114,7 @@ namespace FermiInTheAir.Utility
                 {
                     Console.Clear();
                     OpeningPage.OpenPage();
+                    return;
                 }
             }
         }
@@ -161,8 +162,7 @@ namespace FermiInTheAir.Utility
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
-                    Engine eng = new Engine();
-                    eng.Run();
+                    return;
                 }
                 else if (action.Key == ConsoleKey.C)
                 {
