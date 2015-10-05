@@ -78,7 +78,7 @@ namespace FermiInTheAir.Utility
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
-                    Console.WriteLine("\t{0}\t\t{1}\t\t{2}\t\t{3}", rank, score[1], score[0], score[2]);
+                    Console.WriteLine("\t{0}\t\t{1}\t\t{2}\t\t\t{3}", rank, score[1], score[0], score[2]);
                     Console.WriteLine();
                     try
                     {

@@ -226,6 +226,7 @@ public class Engine
         }
 
         Settings.PrintGameOver();
+
     }
 }
 

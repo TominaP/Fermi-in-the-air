@@ -9,7 +9,7 @@ namespace FermiInTheAir
 {
     public class Music
     {
-        private static string Source = "http://www.thesoundarchive.com/starwars/imperial_march.wav";
+        private static string Source = @"../../imperial_march.wav";
 
         public Music()
         {

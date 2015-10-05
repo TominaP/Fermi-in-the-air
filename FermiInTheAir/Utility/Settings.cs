@@ -3,7 +3,7 @@
 public class Settings
 {
     public Settings()
-    {        
+    {
         Width = 80;
         Height = 40;
         Speed = 1;
@@ -13,6 +13,8 @@ public class Settings
         Console.SetWindowSize(Width, Height);
         Console.SetBufferSize(Width, Height);
         Console.CursorVisible = false;
+
+        PlayerName = "N/A";
     }
 
     public int Width { get; set; }
@@ -27,6 +29,8 @@ public class Settings
 
     public bool Pause { get; set; }
 
+    public string PlayerName { get; set; }
+
     public static void WriteLines(int times)
     {
         for (int i = 0; i < times; i++)
@@ -36,32 +40,82 @@ public class Settings
     }
     public static void PrintGameOver() //Method under construction, change the GameOver bool property to true to see run the method
     {
+
+        Console.Clear();
         WriteLines(5);
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine( "      ________                          ________                      ._.");
+        Console.WriteLine("      ________                          ________                      ._.");
         Console.WriteLine(@"     /  _____/_____    _____   ____     \_____  \___  __ ____________ | |");
         Console.WriteLine(@"     /   \  ___\__  \  /     \_/ __ \     /   |   \  \/ // __ \_  __ \  |");
         Console.WriteLine(@"     \    \_\  \/ __ \|  Y Y  \  ___/    /    |    \   /\  ___/|  | \/ \|");
         Console.WriteLine(@"      \______  (____  /__|_|  /\___  >   \_______  /\_/  \___  >__|     ");
         Console.WriteLine(@"             \/     \/      \/     \/            \/          \/        \/");
-        WriteLines(5);
-        Console.WriteLine("\t\t\t\t\t\t\tTotal score: " + 0); //TODO: property for calculating the score
-        WriteLines(5);
-        Console.WriteLine(new string('-',33) + "NEW GAME(Y/N)" + new string('-',34));
-        if (Console.KeyAvailable)
+        WriteLines(9);
+
+        Settings player = new Settings();
+        StatusLine finalStatus = new StatusLine();
+
+        Console.WriteLine("\t\t\t\t\t\t\tTotal score: " + finalStatus.Score);
+        WriteLines(9);
+        Console.Write("\t\t\tPlease enter your name: ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        try
         {
-            ConsoleKeyInfo newGame = Console.ReadKey();
-            if (newGame.Key == ConsoleKey.Y || newGame.Key == ConsoleKey.Enter)
-            {
-                //start new game
-                //TODO: create method for restarting the game
-            }
-            else if (newGame.Key == ConsoleKey.N)
-            {
-                //exit application
-            }
+            player.PlayerName = Console.ReadLine();
         }
+        catch (Exception)
+        {
+            player.PlayerName = "N/A";
+        }
+        FermiInTheAir.Utility.Leaderboard.WriteScores(finalStatus.Score, player.PlayerName, DateTime.Now);
+        //go to leaderboard
+        Console.ResetColor();
+        FermiInTheAir.Utility.Leaderboard.ViewScores();
+
+        // WriteLines(7);
+        // Console.ResetColor();
+        // Console.WriteLine(new string(' ', (80 - "<< Press <L> to see Fermi in the air's Leaderboard >>".Length - 1) / 2)
+        //         + "<< Press <L> to see Fermi in the air's Leaderboard >>");
+        // WriteLines(2);
+        // Console.WriteLine(new string(' ', (80 - "<< Press <m> to go to main menu >>".Length - 1) / 2)
+        //         + "<< Press <m> to go to main menu >>");
+        // WriteLines(2);
+        // Console.WriteLine(new string(' ', (80 - "<< Press <Enter> to start a new game >>".Length - 1) / 2)
+        //         + "<< Press <Enter> to start a new game >>");
+        // WriteLines(2);
+
+
+
+
+        // if (Console.KeyAvailable)
+        // {
+        //     ConsoleKeyInfo action = Console.ReadKey();
+        //     if (action.Key == ConsoleKey.Enter)
+        //     {
+        //         Console.Clear();
+        //         Engine eng = new Engine();
+        //         eng.Run();
+        //     }
+        //     else if (action.Key == ConsoleKey.L)
+        //     {
+        //         FermiInTheAir.Utility.Leaderboard.ViewScores();
+        //     }
+        //     else if (action.Key == ConsoleKey.Y || action.Key == ConsoleKey.Enter)
+        //     {
+        //         Engine eng = new Engine();
+        //         eng.Run();
+        //     }
+        //     else if (action.Key == ConsoleKey.M)
+        //     {
+        //         Console.Clear();
+        //         FermiInTheAir.Utility.OpeningPage.OpenPage();
+        //     }
+        //     else if (action.Key == ConsoleKey.N)
+        //     {
+        //         //exit application
+        //     }
+        // }
     }
 
-   
+
 }
