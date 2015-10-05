@@ -38,7 +38,7 @@ public class Settings
             Console.WriteLine();
         }
     }
-    public static void PrintGameOver() //Method under construction, change the GameOver bool property to true to see run the method
+    public static void PrintGameOver(int finalScore)
     {
 
         Console.Clear();
@@ -55,7 +55,7 @@ public class Settings
         Settings player = new Settings();
         StatusLine finalStatus = new StatusLine();
 
-        Console.WriteLine("\t\t\t\t\t\t\tTotal score: " + finalStatus.Score);
+        Console.WriteLine("\t\t\t\t\t\t\tTotal score: " + finalScore);
         WriteLines(9);
         Console.Write("\t\t\tPlease enter your name: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -67,7 +67,7 @@ public class Settings
         {
             player.PlayerName = "N/A";
         }
-        FermiInTheAir.Utility.Leaderboard.WriteScores(finalStatus.Score, player.PlayerName, DateTime.Now);
+        FermiInTheAir.Utility.Leaderboard.WriteScores(finalScore, player.PlayerName, DateTime.Now);
         //go to leaderboard
         Console.ResetColor();
         FermiInTheAir.Utility.Leaderboard.ViewScores();

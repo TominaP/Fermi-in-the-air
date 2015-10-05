@@ -28,6 +28,10 @@ namespace FermiInTheAir.Utility
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         }
+                        else if (obj.Symbol == '^')
+                        {
+                            Console.ForegroundColor = PlaneSettings.planeColor;
+                        }
                         else Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(obj.Symbol);
                     }

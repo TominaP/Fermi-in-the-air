@@ -225,11 +225,12 @@ public class Engine
             gameObjectsList = newGameObjectsList;
             newGameObjectsList = new List<GameObject>();
 
-            status.Score += 1;
+            status.Score = settings.Score;
+            status.Lives = plane.Lives;
             Thread.Sleep(sleepTime);
         }
 
-        Settings.PrintGameOver();
+        Settings.PrintGameOver(status.Score);
     }
 
     private bool CheckCollisionWhitOtherObject(Point point)
