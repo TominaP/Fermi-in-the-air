@@ -19,7 +19,7 @@ public class Engine
     private DestroyObject destroyObject;
     private CollectedObject collectObject;
     private GameObject current;
-    private Projectile projectile;   
+    private Projectile projectile;
     private int sleepTime = 300;
 
     public void Run()
@@ -36,7 +36,7 @@ public class Engine
             status.ClearStatus();
             status.PrintStatus();
 
-            if (chanceToSpawn <= 40)
+            if (chanceToSpawn <= 80)
             {
                 int objXPosition = 1;
                 int objYPosition = rnd.Next(0, settings.Width - 2);
@@ -165,7 +165,7 @@ public class Engine
                     {
                         gameObjectsList.Add(projectile);
                     }
-                    
+
                     PrintGameObject.PrintObject(projectile);
                 }
 
@@ -195,7 +195,7 @@ public class Engine
 
                 plane.Print();
             }
-            
+
             while (gameObjectsList.Count > 0)
             {
                 current = gameObjectsList[gameObjectsList.Count - 1];
