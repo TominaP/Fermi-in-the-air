@@ -13,6 +13,7 @@ public class Engine
 
     StatusLine status = new StatusLine();
     Settings settings = new Settings();
+    Sounds sounds = new Sounds();
     Player plane = new Player();
 
     private Random rnd = new Random();
@@ -30,7 +31,7 @@ public class Engine
 
         while (!settings.GameOver)
         {
-            // adding chance to spawn @ 25%               
+            // chance to spawn objects, adjust below for collectables / destroyables           
             int chanceToSpawn = rnd.Next(0, 100);
 
             status.ClearStatus();
@@ -48,6 +49,7 @@ public class Engine
                     {
                         destroyObject.HaveCollision = true;
                         plane.Lives--;
+                        sounds.Crash();
                         break;
                     }
                     if (CheckCollisionWhitOtherObject(point))
@@ -102,6 +104,7 @@ public class Engine
             if (plane.Lives < 0)
             {
                 settings.GameOver = true;
+                sounds.GameOver();
                 break;
             }
 
@@ -160,6 +163,8 @@ public class Engine
                     if (CheckCollisionWhitOtherObject(projectile.UpLeftCorner))
                     {
                         projectile.HaveCollision = true;
+                        sounds.DestroyObject();
+                        settings.Score += 5;
                     }
                     else
                     {
@@ -185,11 +190,13 @@ public class Engine
                 if (haveCollision)
                 {
                     plane.Lives--;
+                    sounds.Crash();
                 }
 
                 if (plane.Lives < 0)
                 {
                     settings.GameOver = true;
+                    sounds.GameOver();
                     break;
                 }
 
@@ -210,10 +217,13 @@ public class Engine
                 {
                     current.HaveCollision = true;
                     plane.Lives--;
+                    sounds.Crash();
                 }
                 else if (CheckCollisionWhitOtherObject(current.UpLeftCorner))
                 {
                     current.HaveCollision = true;
+                    sounds.DestroyObject();
+                    settings.Score += 5;
                 }
                 else
                 {

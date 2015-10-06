@@ -55,6 +55,7 @@
     <Compile Include="Utility\Leaderboard.cs" />
     <Compile Include="Utility\Music.cs" />
     <Compile Include="Utility\PauseScreenPage.cs" />
+    <Compile Include="Utility\Sounds.cs" />
     <Compile Include="Utility\StatusLine.cs" />
     <Compile Include="Utility\OpeningPage.cs" />
     <Compile Include="Utility\PlaneSettings.cs" />
