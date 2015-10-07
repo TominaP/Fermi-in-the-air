@@ -48,6 +48,8 @@ namespace FermiInTheAir.Utility
                     scoresCount++;
                 }
             }
+            scoreReader.Close();
+            scoreWriter.Close();
         }
 
         public static void ViewScores()

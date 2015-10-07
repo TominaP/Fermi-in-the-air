@@ -31,7 +31,7 @@ namespace FermiInTheAir.Utility
 
     public class OpeningPage
     {
-
+        public static bool playTutorial { set; get; }
         public static void FrontPageGameName()
         {
             Console.ResetColor();
@@ -113,6 +113,7 @@ namespace FermiInTheAir.Utility
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
+                    FermiInTheAir.Utility.OpeningPage.playTutorial = true;
                     OpeningPage.OpenPage();
                     return;
                 }

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading;
 public class Settings
 {
     public Settings()
@@ -66,18 +66,17 @@ public class Settings
         catch (Exception)
         {
             player.PlayerName = "N/A";
-
         }
-        try
-        {
+      //  try
+      //  {
             FermiInTheAir.Utility.Leaderboard.WriteScores(finalScore, player.PlayerName, DateTime.Now);
-        }
-        catch (Exception)
-        {
-            Console.ResetColor();
-            Console.Clear();
-            FermiInTheAir.Utility.OpeningPage.OpenPage();
-        }
+      // }
+      // catch (Exception)
+      // {
+      //     Console.ResetColor();
+      //     Console.Clear();
+      //     FermiInTheAir.Utility.OpeningPage.OpenPage();
+      // }
         //go to leaderboard
         Console.ResetColor();
         Console.Clear();
@@ -128,5 +127,70 @@ public class Settings
         // }
     }
 
+    internal static void Tutorial()
+    {
+        Console.Clear();
 
+        WriteLines(5);
+        Console.Write(new string(' ', (80 - "<< Collect these:   (+10 points) >>".Length - 1) / 2)
+                + "<< Collect these: ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write("$");
+        Console.ResetColor();
+        Console.WriteLine(" (+10 points) >>");
+        Thread.Sleep(1000);
+
+        WriteLines(4);
+        Console.Write(new string(' ', (80 - "<< Avoid and shoot at these:    (+5 points) >>".Length - 1) / 2)
+                + "<< Avoid and shoot at these: ");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("##");
+        Console.ResetColor();
+
+        Console.WriteLine(" (+5 points) >>");
+        Thread.Sleep(1000);
+        WriteLines(4);
+        Console.WriteLine(new string(' ', (80 - "Move your plane with the arrows: >>".Length - 1) / 2)
+                + "<< Move your plane with the arrows: >>");
+        Console.WriteLine();
+        Thread.Sleep(500);
+        Console.WriteLine(new string(' ', (80 - "<- for left".Length - 1) / 2)
+                + "<- for left");
+        Console.WriteLine();
+        Thread.Sleep(500);
+        Console.WriteLine(new string(' ', (80 - "^ for up".Length - 1) / 2)
+                + "^ for up");
+        Console.WriteLine();
+        Thread.Sleep(500);
+        Console.WriteLine(new string(' ', (80 - "v for down".Length - 1) / 2)
+                + "v for down");
+        Console.WriteLine();
+        Thread.Sleep(500);
+        Console.WriteLine(new string(' ', (80 - "-> for right".Length - 1) / 2)
+                + "-> for right");
+        Thread.Sleep(1500);
+
+        WriteLines(4);
+        Console.WriteLine(new string(' ', (80 - "<< Shoot with <spacebar> >>".Length - 1) / 2)
+                + "<< Shoot with <spacebar> >>");
+        Thread.Sleep(1500);
+
+        WriteLines(4);
+        Console.WriteLine(new string(' ', (80 - "Have fun, yo!".Length - 1)  / 2)
+                + "Have fun, yo!");
+        Thread.Sleep(500);
+        Console.Write(new string(' ', (80 - " 3, 2, 1...".Length - 1)  / 2) + " 3, ");
+        Thread.Sleep(500);
+        Console.Write("2, ");
+        Thread.Sleep(500);
+        Console.Write("1");
+        Thread.Sleep(500);
+        Console.Write(".");
+        Thread.Sleep(200);
+        Console.Write(".");
+        Thread.Sleep(200);
+        Console.Write(".");
+        Thread.Sleep(100);
+        Console.Clear();
+    }
 }

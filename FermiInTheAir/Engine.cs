@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
+using System.Timers;
+using System.Diagnostics;
 
 
 public class Engine
@@ -22,11 +24,21 @@ public class Engine
     private GameObject current;
     private Projectile projectile;
     private int sleepTime = 300;
+    private Stopwatch difficultyTimer = Stopwatch.StartNew();
+    private int destroyObjectSpawnFrequency = 15;
 
     public void Run()
     {
         plane.Print();
 
+        if (FermiInTheAir.Utility.OpeningPage.playTutorial)
+        {
+            Settings.Tutorial(); // plays only one time when opening application
+        }
+        
+        plane.Print();
+
+        FermiInTheAir.Utility.OpeningPage.playTutorial = false;
         //set plane point coordinates to true       
 
         while (!settings.GameOver)
@@ -37,10 +49,15 @@ public class Engine
             status.ClearStatus();
             status.PrintStatus();
 
-            if (chanceToSpawn <= 40)
+            if (Convert.ToInt32(difficultyTimer.ElapsedMilliseconds) > 30000)
+            {
+                destroyObjectSpawnFrequency = 40;
+            }
+
+            if (chanceToSpawn <= destroyObjectSpawnFrequency) // previously = 40
             {
                 int objXPosition = 1;
-                int objYPosition = rnd.Next(0, settings.Width - 2);
+                int objYPosition = rnd.Next(11, settings.Width - 11); // previously = rnd.Next(0, settings.Width - 2);
                 destroyObject = new DestroyObject(new Point(objXPosition, objYPosition));
 
                 foreach (var point in destroyObject.PositionsCoordinates)
@@ -68,7 +85,7 @@ public class Engine
             if (chanceToSpawn <= 15)
             {
                 int objXPosition = 1;
-                int objYPosition = rnd.Next(0, settings.Width);
+                int objYPosition = rnd.Next(7, settings.Width - 7); // previously = rnd.Next(0, settings.Width);
                 collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
 
                 if (CheckCollisionWithPlane(collectObject, plane))
