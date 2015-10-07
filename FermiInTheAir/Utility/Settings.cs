@@ -61,7 +61,7 @@ public class Settings
         Console.ForegroundColor = ConsoleColor.Yellow;
         try
         {
-            player.PlayerName = Console.ReadLine(true);
+            player.PlayerName = Console.ReadLine();
         }
         catch (Exception)
         {
