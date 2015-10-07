@@ -222,7 +222,7 @@ public class Engine
                     }
                     else
                     {
-                        settings.Score += 5;
+                        settings.Score += 10;
                     }
                     sounds.Crash();
                 }
