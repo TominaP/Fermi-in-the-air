@@ -103,6 +103,7 @@ public class Engine
                 {
                     gameObjectsList.Add(collectObject);
                     collectObject.SetPositionsCoordinates();
+                    
                 }
             }
 
@@ -130,8 +131,9 @@ public class Engine
 
             while (Console.KeyAvailable)
             {
-                ConsoleKeyInfo keyPressed = Console.ReadKey();
+                
                 plane.Clear();
+                ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 
                 if (keyPressed.Key == ConsoleKey.UpArrow)
                 {
