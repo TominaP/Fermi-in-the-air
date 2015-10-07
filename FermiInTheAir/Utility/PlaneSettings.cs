@@ -57,9 +57,9 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine();
                 Console.ForegroundColor = planeColor;
 
-                Console.WriteLine(new string(' ', 35) + @"         ^");
-                Console.WriteLine(new string(' ', 35) + @"        (*)");
-                Console.WriteLine(new string(' ', 35) + @"        (*)");
+                Console.WriteLine(new string(' ', 35) + "         ^");
+                Console.WriteLine(new string(' ', 35) + "        (*)");
+                Console.WriteLine(new string(' ', 35) + "        (*)");
                 Console.WriteLine(new string(' ', 35) + @"       // \\");
                 Console.WriteLine(new string(' ', 35) + @"      /|/*\|\");
                 Console.WriteLine(new string(' ', 35) + @"     /_FERMI_\");

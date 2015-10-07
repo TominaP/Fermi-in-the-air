@@ -164,11 +164,11 @@ namespace FermiInTheAir.GameObjects
             else if (PlaneSettings.planeThreeIsSelected)
             {
                 Console.SetCursorPosition(y + 4, x);
-                Console.Write(@"^");
+                Console.Write("^");
                 Console.SetCursorPosition(y + 3, x + 1);
-                Console.Write(@"(*)");
+                Console.Write("(*)");
                 Console.SetCursorPosition(y + 3, x + 2);
-                Console.Write(@"(*)");
+                Console.Write("(*)");
                 Console.SetCursorPosition(y + 2, x + 3);
                 Console.Write(@"// \\");               
                 Console.SetCursorPosition(y + 1, x + 4);
