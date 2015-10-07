@@ -45,7 +45,7 @@ public class Engine
 
                 foreach (var point in destroyObject.PositionsCoordinates)
                 {
-                    if (CheckCollisionWhitPlane(destroyObject, plane))
+                    if (CheckCollisionWithPlane(destroyObject, plane))
                     {
                         destroyObject.HaveCollision = true;
                         plane.Lives--;
@@ -71,7 +71,7 @@ public class Engine
                 int objYPosition = rnd.Next(0, settings.Width);
                 collectObject = new CollectedObject(new Point(objXPosition, objYPosition));
 
-                if (CheckCollisionWhitPlane(collectObject, plane))
+                if (CheckCollisionWithPlane(collectObject, plane))
                 {
                     collectObject.HaveCollision = true;
                     settings.Score += 5; //TODO : regulate score
@@ -213,10 +213,17 @@ public class Engine
                 current.Move();
                 current.SetPositionsCoordinates();
 
-                if (CheckCollisionWhitPlane(current, plane))
+                if (CheckCollisionWithPlane(current, plane))
                 {
                     current.HaveCollision = true;
-                    plane.Lives--;
+                    if (current.Symbol != '$')
+                    {
+                        plane.Lives--;
+                    }
+                    else
+                    {
+                        settings.Score += 5;
+                    }
                     sounds.Crash();
                 }
                 else if (CheckCollisionWhitOtherObject(current.UpLeftCorner))
@@ -313,7 +320,7 @@ public class Engine
     }
 
 
-    private bool CheckCollisionWhitPlane(GameObject current, Player plane)
+    private bool CheckCollisionWithPlane(GameObject current, Player plane)
     {
         bool haveCollision = false;
 
