@@ -88,7 +88,7 @@ namespace FermiInTheAir.GameObjects
         {
             Point[] positions = new Point[48];
 
-            if (PlaneSettings.planeOneIsSelected)
+            if (true)//(PlaneSettings.planeOneIsSelected) //7.10 Edward
             {
                 int index = 0;
                 positions[index++] = new Point(this.Position.X, this.Position.Y + 8);

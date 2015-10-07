@@ -66,10 +66,21 @@ public class Settings
         catch (Exception)
         {
             player.PlayerName = "N/A";
+
         }
-        FermiInTheAir.Utility.Leaderboard.WriteScores(finalScore, player.PlayerName, DateTime.Now);
+        try
+        {
+            FermiInTheAir.Utility.Leaderboard.WriteScores(finalScore, player.PlayerName, DateTime.Now);
+        }
+        catch (Exception)
+        {
+            Console.ResetColor();
+            Console.Clear();
+            FermiInTheAir.Utility.OpeningPage.OpenPage();
+        }
         //go to leaderboard
         Console.ResetColor();
+        Console.Clear();
         FermiInTheAir.Utility.Leaderboard.ViewScores();
 
         // WriteLines(7);

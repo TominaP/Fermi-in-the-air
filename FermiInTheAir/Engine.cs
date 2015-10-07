@@ -216,11 +216,11 @@ public class Engine
                 if (CheckCollisionWithPlane(current, plane))
                 {
                     current.HaveCollision = true;
-                    if (current.Symbol != '$')
+                    if (current.Symbol != '$' && current.Symbol!= '^')
                     {
                         plane.Lives--;
                     }
-                    else
+                    else if (current.Symbol == '$')
                     {
                         settings.Score += 10;
                     }
