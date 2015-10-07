@@ -133,7 +133,7 @@ public class Settings
 
         WriteLines(5);
         Console.Write(new string(' ', (80 - "<< Collect these:   (+10 points) >>".Length - 1) / 2)
-                + "<< Collect these: ");
+                + "<< Collect the dollars: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write("$");
         Console.ResetColor();
@@ -142,7 +142,7 @@ public class Settings
 
         WriteLines(4);
         Console.Write(new string(' ', (80 - "<< Avoid and shoot at these:    (+5 points) >>".Length - 1) / 2)
-                + "<< Avoid and shoot at these: ");
+                + "<< Avoid and shoot at the bricks: ");
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.Write("##");
         Console.ResetColor();
