@@ -109,7 +109,7 @@ namespace FermiInTheAir.Utility
 
             while (true)
             {
-                ConsoleKeyInfo action = Console.ReadKey();
+                ConsoleKeyInfo action = Console.ReadKey(true);
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
@@ -162,7 +162,7 @@ namespace FermiInTheAir.Utility
 
             while (true)
             {
-                ConsoleKeyInfo action = Console.ReadKey();
+                ConsoleKeyInfo action = Console.ReadKey(true);
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
