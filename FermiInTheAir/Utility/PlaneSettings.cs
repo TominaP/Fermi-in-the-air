@@ -71,7 +71,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
                 Console.WriteLine("\t\t\t  << Press <m> to go to main menu >>");
 
-                ConsoleKeyInfo action = Console.ReadKey();
+                ConsoleKeyInfo action = Console.ReadKey(true);
                 if (action.Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
@@ -110,7 +110,7 @@ namespace FermiInTheAir.Utility
                 Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
                 Console.WriteLine();
                 Console.WriteLine("\t\t\t<< Press <m> to go to main menu >>");
-                action = Console.ReadKey();
+                action = Console.ReadKey(true);
 
                 if (action.Key == ConsoleKey.Enter)
                 {
@@ -153,7 +153,7 @@ namespace FermiInTheAir.Utility
             Console.WriteLine("\t\t     << Press <Enter> to start a new game >>");
             Console.WriteLine();
             Console.WriteLine("\t\t       << Press <m> to go to main menu >>");
-            ConsoleKeyInfo action = Console.ReadKey();
+            ConsoleKeyInfo action = Console.ReadKey(true);
             if (action.Key == ConsoleKey.Enter)
             {
                 Console.Clear();
@@ -206,7 +206,7 @@ namespace FermiInTheAir.Utility
             Console.WriteLine("\t\t\t<< Press <Enter> to start a new game >>");
             Console.WriteLine();
             Console.WriteLine("\t\t\t<< Press <m> to go to main menu >>");
-            ConsoleKeyInfo go = Console.ReadKey();
+            ConsoleKeyInfo go = Console.ReadKey(true);
             if (go.Key == ConsoleKey.Enter)
             {
                 Console.Clear();
